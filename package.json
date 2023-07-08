@@ -1,0 +1,53 @@
+{
+  "name": "task-api",
+  "version": "0.0.0",
+  "description": "Maintenance task manager",
+  "main": "index.js",
+  "author": "Mateus Barbosa (mateusxis) <dev.mateusxis@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateusxis/task-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mateusxis/task-api.git/issues"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon --inspect=0.0.0.0:5858 index.js",
+    "test": "jest --passWithNoTests",
+    "test-coverage": "yarn test --coverage",
+    "lint": "eslint .",
+    "lint:staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "jest --bail --findRelatedTests",
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "awilix": "^8.0.1",
+    "http-status": "^1.6.2",
+    "koa": "^2.14.2",
+    "koa-router": "^12.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-security": "^1.7.1",
+    "jest": "^29.6.1",
+    "lint-staged": "^13.2.3",
+    "nodemon": "^2.0.22",
+    "prettier": "^3.0.0"
+  }
+}
