@@ -13,6 +13,14 @@ module.exports = () => {
     return process.env.BASE_URL;
   };
 
+  const getDatabaseUrl = () => {
+    if (!process.env.DATABASE_URL) {
+      throw new Error('"DATABASE_URL" must be defined.');
+    }
+
+    return process.env.DATABASE_URL;
+  };
+
   const getLogging = () => {
     if (!process.env.LOGGING_MAX_FILES) {
       throw new Error('"LOGGING_MAX_FILES" must be defined.');
@@ -39,6 +47,7 @@ module.exports = () => {
 
   return {
     baseUrl: getBaseUrl(),
+    databaseUrl: getDatabaseUrl(),
     nodeEnv: getNodeEnv(),
     serverPort: getServerPort(),
     logging: getLogging()

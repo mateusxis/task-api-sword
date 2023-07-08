@@ -7,6 +7,7 @@ jest.mock('dotenv', () => ({
 beforeEach(() => {
   process.env.NODE_ENV = 'development';
   process.env.BASE_URL = 'http://localhost';
+  process.env.DATABASE_URL = 'mysql://myuser:mypassword@localhost:3306/mydb';
   process.env.LOGGING_COLORIZE = '0';
   process.env.LOGGING_MAX_FILES = '2';
   process.env.LOGGING_MAX_SIZE = '102400';
@@ -19,6 +20,7 @@ describe('config()', () => {
   it('should call config return variables', () => {
     expect(config()).toEqual({
       baseUrl: 'http://localhost',
+      databaseUrl: 'mysql://myuser:mypassword@localhost:3306/mydb',
       logging: {
         colorize: false,
         maxFiles: 2,
@@ -39,6 +41,12 @@ describe('config()', () => {
     delete process.env.BASE_URL;
 
     expect(() => config()).toThrowError('"BASE_URL" must be defined.');
+  });
+
+  it('should throw error when database url variable is missing', () => {
+    delete process.env.DATABASE_URL;
+
+    expect(() => config()).toThrowError('"DATABASE_URL" must be defined.');
   });
 
   it('should throw error when server port variable is missing', () => {
