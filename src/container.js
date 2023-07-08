@@ -1,6 +1,8 @@
-const { createContainer, asFunction, asValue } = require('awilix');
+const { createContainer, asClass, asFunction, asValue } = require('awilix');
 
 const app = require('./app');
+const taskDomain = require('./domain/task');
+const userDomain = require('./domain/user');
 const database = require('./infra/database');
 const encryption = require('./infra/encryption');
 const logger = require('./infra/logger');
@@ -19,7 +21,9 @@ container.register({
   logger: asFunction(logger).singleton(),
   middlewares: asFunction(middlewares).singleton(),
   router: asFunction(router).singleton(),
-  server: asFunction(server).singleton()
+  server: asFunction(server).singleton(),
+  taskDomain: asClass(taskDomain),
+  userDomain: asClass(userDomain)
 });
 
 module.exports = container;
