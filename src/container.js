@@ -6,6 +6,8 @@ const userDomain = require('./domain/user');
 const database = require('./infra/database');
 const encryption = require('./infra/encryption');
 const logger = require('./infra/logger');
+const taskRepository = require('./infra/repositories/task');
+const userRepository = require('./infra/repositories/user');
 const middlewares = require('./interfaces/http/middlewares');
 const router = require('./interfaces/http/router');
 const server = require('./interfaces/http/server');
@@ -23,7 +25,9 @@ container.register({
   router: asFunction(router).singleton(),
   server: asFunction(server).singleton(),
   taskDomain: asClass(taskDomain),
-  userDomain: asClass(userDomain)
+  taskRepository: asFunction(taskRepository).singleton(),
+  userDomain: asClass(userDomain),
+  userRepository: asFunction(userRepository).singleton()
 });
 
 module.exports = container;
