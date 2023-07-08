@@ -6,7 +6,6 @@ if (!fs.existsSync(`logs`)) {
 }
 
 module.exports = ({ config }) => {
-  // eslint-disable-next-line new-cap
   return new winston.createLogger({
     transports: [
       new winston.transports.Console(),
