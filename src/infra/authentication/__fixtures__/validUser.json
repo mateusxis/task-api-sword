@@ -1,0 +1,7 @@
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john@doe.com",
+  "role": "MANAGER",
+  "createdAt": "2023-07-08T19:45:24.955Z"
+}

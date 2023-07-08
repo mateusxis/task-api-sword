@@ -6,6 +6,8 @@ jest.mock('dotenv', () => ({
 
 beforeEach(() => {
   process.env.NODE_ENV = 'development';
+  process.env.AUTH_SECRET = 'myAuthKey';
+  process.env.AUTH_TTL = '3700';
   process.env.BASE_URL = 'http://localhost';
   process.env.DATABASE_URL = 'mysql://myuser:mypassword@localhost:3306/mydb';
   process.env.LOGGING_COLORIZE = '0';
@@ -19,6 +21,10 @@ beforeEach(() => {
 describe('config()', () => {
   it('should call config return variables', () => {
     expect(config()).toEqual({
+      authentication: {
+        authSecret: 'myAuthKey',
+        ttl: 3700
+      },
       baseUrl: 'http://localhost',
       databaseUrl: 'mysql://myuser:mypassword@localhost:3306/mydb',
       logging: {
@@ -59,6 +65,20 @@ describe('config()', () => {
     delete process.env.NODE_ENV;
 
     expect(config().nodeEnv).toEqual('development');
+  });
+
+  describe('authentication', () => {
+    it('should return 3600 when ttl variable is missing', () => {
+      delete process.env.AUTH_TTL;
+
+      expect(config().authentication.ttl).toEqual(3600);
+    });
+
+    it('should throw error when auth key variable is missing', () => {
+      delete process.env.AUTH_SECRET;
+
+      expect(() => config()).toThrowError('"AUTH_SECRET" must be defined.');
+    });
   });
 
   describe('logging', () => {

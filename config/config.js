@@ -1,3 +1,4 @@
+const assert = require('assert');
 require('dotenv').config();
 
 module.exports = () => {
@@ -5,30 +6,30 @@ module.exports = () => {
     return process.env.NODE_ENV || 'development';
   };
 
+  const getAuthentication = () => {
+    assert(process.env.AUTH_SECRET, '"AUTH_SECRET" must be defined.');
+
+    return {
+      authSecret: process.env.AUTH_SECRET,
+      ttl: parseInt(process.env.AUTH_TTL, 10) || 3600
+    };
+  };
+
   const getBaseUrl = () => {
-    if (!process.env.BASE_URL) {
-      throw new Error('"BASE_URL" must be defined.');
-    }
+    assert(process.env.BASE_URL, '"BASE_URL" must be defined.');
 
     return process.env.BASE_URL;
   };
 
   const getDatabaseUrl = () => {
-    if (!process.env.DATABASE_URL) {
-      throw new Error('"DATABASE_URL" must be defined.');
-    }
+    assert(process.env.DATABASE_URL, '"DATABASE_URL" must be defined.');
 
     return process.env.DATABASE_URL;
   };
 
   const getLogging = () => {
-    if (!process.env.LOGGING_MAX_FILES) {
-      throw new Error('"LOGGING_MAX_FILES" must be defined.');
-    }
-
-    if (!process.env.LOGGING_MAX_SIZE) {
-      throw new Error('"LOGGING_MAX_SIZE" must be defined.');
-    }
+    assert(process.env.LOGGING_MAX_FILES, '"LOGGING_MAX_FILES" must be defined.');
+    assert(process.env.LOGGING_MAX_SIZE, '"LOGGING_MAX_SIZE" must be defined.');
 
     return {
       colorize: Boolean(parseInt(process.env.LOGGING_COLORIZE, 10)),
@@ -38,14 +39,13 @@ module.exports = () => {
   };
 
   const getServerPort = () => {
-    if (!process.env.SERVER_PORT) {
-      throw new Error('"SERVER_PORT" must be defined.');
-    }
+    assert(process.env.SERVER_PORT, '"SERVER_PORT" must be defined.');
 
     return parseInt(process.env.SERVER_PORT, 10);
   };
 
   return {
+    authentication: getAuthentication(),
     baseUrl: getBaseUrl(),
     databaseUrl: getDatabaseUrl(),
     nodeEnv: getNodeEnv(),
