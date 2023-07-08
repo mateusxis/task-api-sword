@@ -5,8 +5,12 @@ jest.mock('dotenv', () => ({
 }));
 
 beforeEach(() => {
-  process.env.SERVER_PORT = 3000;
   process.env.NODE_ENV = 'development';
+  process.env.BASE_URL = 'http://localhost';
+  process.env.LOGGING_COLORIZE = '0';
+  process.env.LOGGING_MAX_FILES = '2';
+  process.env.LOGGING_MAX_SIZE = '102400';
+  process.env.SERVER_PORT = 3000;
 
   jest.resetAllMocks();
 });
@@ -14,8 +18,14 @@ beforeEach(() => {
 describe('config()', () => {
   it('should call config return variables', () => {
     expect(config()).toEqual({
-      serverPort: 3000,
-      nodeEnv: 'development'
+      baseUrl: 'http://localhost',
+      logging: {
+        colorize: false,
+        maxFiles: 2,
+        maxsize: 102400
+      },
+      nodeEnv: 'development',
+      serverPort: 3000
     });
   });
 
@@ -25,15 +35,47 @@ describe('config()', () => {
     expect(config().nodeEnv).toEqual('production');
   });
 
-  it('should throw error missing port server variable', () => {
+  it('should throw error when base url variable is missing', () => {
+    delete process.env.BASE_URL;
+
+    expect(() => config()).toThrowError('"BASE_URL" must be defined.');
+  });
+
+  it('should throw error when server port variable is missing', () => {
     delete process.env.SERVER_PORT;
 
     expect(() => config()).toThrowError('"SERVER_PORT" must be defined.');
   });
 
-  it('should throw error missing node env variable', () => {
+  it('should return "development" node env variable is missing', () => {
     delete process.env.NODE_ENV;
 
     expect(config().nodeEnv).toEqual('development');
+  });
+
+  describe('logging', () => {
+    it('should return true when colorize variable is "1"', () => {
+      process.env.LOGGING_COLORIZE = '1';
+
+      expect(config().logging.colorize).toEqual(true);
+    });
+
+    it('should return false when colorize variable is missing', () => {
+      delete process.env.LOGGING_COLORIZE;
+
+      expect(config().logging.colorize).toEqual(false);
+    });
+
+    it('should throw error when max files variable is missing', () => {
+      delete process.env.LOGGING_MAX_FILES;
+
+      expect(() => config()).toThrowError('"LOGGING_MAX_FILES" must be defined.');
+    });
+
+    it('should throw error when max size variable is missing', () => {
+      delete process.env.LOGGING_MAX_SIZE;
+
+      expect(() => config()).toThrowError('"LOGGING_MAX_SIZE" must be defined.');
+    });
   });
 });
