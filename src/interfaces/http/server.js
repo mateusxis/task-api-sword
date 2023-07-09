@@ -15,10 +15,6 @@ module.exports = ({ config, logger, middlewares, router }) => {
       app.listen(config.serverPort, () => {
         logger.info(`Server listening on ${config.serverPort}`);
       });
-
-      setTimeout(() => {
-        throw 'test'
-      }, 3000)
     });
 
   return {
