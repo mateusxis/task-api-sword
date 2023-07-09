@@ -1,4 +1,4 @@
-const { OK, INTERNAL_SERVER_ERROR, NOT_FOUND } = require('http-status');
+const { OK, INTERNAL_SERVER_ERROR } = require('http-status');
 const Router = require('koa-router');
 
 module.exports = ({ database, logger, authController, taskController, userController, middlewares }) => {
@@ -12,7 +12,7 @@ module.exports = ({ database, logger, authController, taskController, userContro
   router.delete('/tasks/:id', middlewares.authMiddleware, taskController.remove);
   
   router.post('/users', userController.save);
-  router.get('/users/:id', middlewares.authMiddleware, userController.get);
+  router.get('/me', middlewares.authMiddleware, userController.get);
 
   router.get('/liveness', async (ctx) => {
     ctx.status = OK;
@@ -30,7 +30,7 @@ module.exports = ({ database, logger, authController, taskController, userContro
 
     const readiness = Boolean(databaseReadiness);
 
-    ctx.status = readiness ? OK : NOT_FOUND;
+    ctx.status = readiness ? OK : INTERNAL_SERVER_ERROR;
     ctx.body = readiness ? 'OK' : 'NOK';
   });
 
