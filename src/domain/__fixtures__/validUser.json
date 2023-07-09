@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john@doe.com",
+  "password": "$2b$10$YaeJvodd8PIOgQ6YjqJI0.XC8DitB7xIYSUDu265efCMYZjdnfckm",
+  "role": "MANAGER",
+  "createdAt": "2023-07-08T19:45:24.955Z"
+}

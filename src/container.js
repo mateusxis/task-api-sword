@@ -1,6 +1,7 @@
 const { createContainer, asClass, asFunction, asValue } = require('awilix');
 
 const app = require('./app');
+const authDomain = require('./domain/auth');
 const taskDomain = require('./domain/task');
 const userDomain = require('./domain/user');
 const authentication = require('./infra/authentication');
@@ -19,6 +20,7 @@ const container = createContainer();
 container.register({
   app: asFunction(app).singleton(),
   authentication: asFunction(authentication).singleton(),
+  authDomain: asFunction(authDomain).singleton(),
   config: asValue(config()),
   database: asFunction(database).singleton(),
   encryption: asFunction(encryption).singleton(),
