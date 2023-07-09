@@ -33,7 +33,7 @@ const taskDomain = ({ logger, taskRepository }) => {
     const find = MAP_TASK_GET[`${role}`];
 
     if (!find) {
-      const error = new Error(`Your role ${role} does not exist`);
+      const error = new Error(`your role ${role} does not exist`);
       logger.error(error);
       throw error;
     }
@@ -45,7 +45,7 @@ const taskDomain = ({ logger, taskRepository }) => {
 
   const remove = async ({ id, role }) => {
     if (!LIST_ROLES_WITH_EXCLUSION.includes(role)) {
-      const error = new Error(`You don't have permission to delete task ${id}`);
+      const error = new Error(`you don't have permission to delete task ${id}`);
       logger.error(error);
       throw error;
     }
@@ -59,7 +59,7 @@ const taskDomain = ({ logger, taskRepository }) => {
     const { valid, errors, data } = validate({ userId, summary });
     if (!valid) {
       logger.error(errors);
-      const error = new Error('There are one or more invalid fields');
+      const error = new Error('there are one or more invalid fields');
       error.errors = errors;
       throw error;
     }
@@ -73,7 +73,7 @@ const taskDomain = ({ logger, taskRepository }) => {
     const { valid, errors, data } = validate({ summary, executedAt, userId, id });
     if (!valid) {
       logger.error(errors);
-      const error = new Error('There are one or more invalid fields');
+      const error = new Error('there are one or more invalid fields');
       error.errors = errors;
       throw error;
     }

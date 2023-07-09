@@ -50,7 +50,7 @@ describe('TaskDomain', () => {
       taskRepository: fakeTaskRepository
     });
 
-    it('should call getAll then role user is MANAGER', async () => {
+    it('should call listAll then role user is MANAGER', async () => {
       const validUserFixture = {
         userId: 1,
         role: 'MANAGER'
@@ -58,7 +58,7 @@ describe('TaskDomain', () => {
       const auth = await taskDomain.list(validUserFixture);
 
       expect(Array.isArray(auth)).toBeTruthy();
-      expect(fakeTaskRepository.getAll).toHaveBeenCalledWith({ userId: validUserFixture.userId });
+      expect(fakeTaskRepository.listAll).toHaveBeenCalledWith({ userId: validUserFixture.userId });
     });
 
     it('should call listByUserId then role user is DEV', async () => {
@@ -69,7 +69,7 @@ describe('TaskDomain', () => {
       const auth = await taskDomain.list(validUserFixture);
 
       expect(Array.isArray(auth)).toBeTruthy();
-      expect(fakeTaskRepository.getByUserId).toHaveBeenCalledWith({ userId: validUserFixture.userId });
+      expect(fakeTaskRepository.listByUserId).toHaveBeenCalledWith({ userId: validUserFixture.userId });
     });
 
     it('should not call repository then role user is invalid', async () => {
@@ -78,9 +78,9 @@ describe('TaskDomain', () => {
         role: 'NONE'
       };
 
-      await expect(taskDomain.list(validUserFixture)).rejects.toThrowError('Your role NONE does not exist');
-      expect(fakeTaskRepository.getByUserId).not.toHaveBeenCalled();
-      expect(fakeTaskRepository.getByUserId).not.toHaveBeenCalled();
+      await expect(taskDomain.list(validUserFixture)).rejects.toThrowError('your role NONE does not exist');
+      expect(fakeTaskRepository.listByUserId).not.toHaveBeenCalled();
+      expect(fakeTaskRepository.listByUserId).not.toHaveBeenCalled();
     });
   });
 
@@ -101,7 +101,7 @@ describe('TaskDomain', () => {
 
     it('should not call remove then role user is invalid', async () => {
       await expect(taskDomain.remove({ id: 1, role: 'DEV' })).rejects.toThrowError(
-        `You don't have permission to delete task 1`
+        `you don't have permission to delete task 1`
       );
       expect(fakeTaskRepository.remove).not.toHaveBeenCalled();
     });
@@ -127,7 +127,7 @@ describe('TaskDomain', () => {
 
     it('should not call repository then userId is undefined', async () => {
       await expect(taskDomain.save({ summary: validTaskFixture.summary })).rejects.toThrowError(
-        `There are one or more invalid fields`
+        `there are one or more invalid fields`
       );
       expect(fakeTaskRepository.save).not.toHaveBeenCalled();
     });
@@ -161,7 +161,7 @@ describe('TaskDomain', () => {
       const { summary, executedAt, id } = validTaskFixture;
 
       await expect(taskDomain.update({ summary, executedAt, id })).rejects.toThrowError(
-        `There are one or more invalid fields`
+        `there are one or more invalid fields`
       );
       expect(fakeTaskRepository.update).not.toHaveBeenCalled();
     });
