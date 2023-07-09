@@ -24,7 +24,7 @@ const authDomain = ({ authentication, encryption, logger, userRepository }) => {
     const { valid, errors, data } = validate({ email, password });
     if (!valid) {
       logger.error(errors);
-      const error = new Error('Invalid email or password');
+      const error = new Error('invalid email or password.');
       error.errors = errors;
       throw error;
     }
@@ -33,7 +33,7 @@ const authDomain = ({ authentication, encryption, logger, userRepository }) => {
     const { password: encryptedPassword } = user;
     delete user.password;
 
-    if (!encryption.comparePassword(data.password, encryptedPassword)) throw new Error('Invalid credentials');
+    if (!encryption.comparePassword(data.password, encryptedPassword)) throw new Error('invalid credentials');
 
     const token = authentication.generate(user);
 
