@@ -13,6 +13,9 @@ const encryption = require('./infra/encryption');
 const logger = require('./infra/logger');
 const taskRepository = require('./infra/repositories/task');
 const userRepository = require('./infra/repositories/user');
+const authController = require('./interfaces/http/controllers/auth');
+const taskController = require('./interfaces/http/controllers/task');
+const userController = require('./interfaces/http/controllers/user');
 const middlewares = require('./interfaces/http/middlewares');
 const router = require('./interfaces/http/router');
 const server = require('./interfaces/http/server');
@@ -24,6 +27,7 @@ container.register({
   app: asFunction(app).singleton(),
   authentication: asFunction(authentication).singleton(),
   authDomain: asFunction(authDomain).singleton(),
+  authController: asFunction(authController).singleton(),
   authService: asFunction(authService).singleton(),
   config: asValue(config()),
   database: asFunction(database).singleton(),
@@ -35,8 +39,10 @@ container.register({
   taskDomain: asFunction(taskDomain).singleton(),
   taskRepository: asFunction(taskRepository).singleton(),
   taskService: asFunction(taskService).singleton(),
+  taskController: asFunction(taskController).singleton(),
   userDomain: asFunction(userDomain).singleton(),
   userService: asFunction(userService).singleton(),
+  userController: asFunction(userController).singleton(),
   userRepository: asFunction(userRepository).singleton()
 });
 
