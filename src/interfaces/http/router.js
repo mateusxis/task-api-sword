@@ -6,7 +6,7 @@ module.exports = ({ database, logger, authController, taskController, userContro
 
   router.post('/login', authController.login);
 
-  router.get('/tasks', middlewares.authMiddleware, taskController.get);
+  router.get('/tasks', middlewares.authMiddleware, taskController.list);
   router.post('/tasks', middlewares.authMiddleware, taskController.save);
   router.put('/tasks/:id', middlewares.authMiddleware, taskController.update);
   router.delete('/tasks/:id', middlewares.authMiddleware, taskController.remove);

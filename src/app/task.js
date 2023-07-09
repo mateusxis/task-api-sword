@@ -1,6 +1,6 @@
 const taskService = ({ taskDomain }) => {
-  const get = async ({ user }) => {
-    const task = await taskDomain.get({ userId: user.id, role: user.role });
+  const list = async ({ user }) => {
+    const task = await taskDomain.list({ userId: user.id, role: user.role });
 
     return task;
   };
@@ -24,7 +24,7 @@ const taskService = ({ taskDomain }) => {
   };
 
   return {
-    get,
+    list,
     remove,
     save,
     update

@@ -1,7 +1,7 @@
 const taskController = ({ taskService }) => {
-  const get = async (ctx) => {
+  const list = async (ctx) => {
     const { user } = ctx.state;
-    const tasks = await taskService.getById({ user });
+    const tasks = await taskService.list({ user });
 
     ctx.body = tasks;
     ctx.status = 200;
@@ -32,7 +32,7 @@ const taskController = ({ taskService }) => {
   };
 
   return {
-    get,
+    list,
     remove,
     save,
     update

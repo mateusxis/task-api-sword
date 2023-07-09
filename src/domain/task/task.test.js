@@ -44,7 +44,7 @@ describe('TaskDomain', () => {
     });
   });
 
-  describe('get()', () => {
+  describe('list()', () => {
     const taskDomain = taskDomainFactory({
       logger: fakeLogger,
       taskRepository: fakeTaskRepository
@@ -55,30 +55,30 @@ describe('TaskDomain', () => {
         userId: 1,
         role: 'MANAGER'
       };
-      const auth = await taskDomain.get(validUserFixture);
+      const auth = await taskDomain.list(validUserFixture);
 
       expect(Array.isArray(auth)).toBeTruthy();
       expect(fakeTaskRepository.getAll).toHaveBeenCalledWith({ userId: validUserFixture.userId });
     });
 
-    it('should call getAll then role user is DEV', async () => {
+    it('should call listByUserId then role user is DEV', async () => {
       const validUserFixture = {
         userId: 2,
         role: 'DEV'
       };
-      const auth = await taskDomain.get(validUserFixture);
+      const auth = await taskDomain.list(validUserFixture);
 
       expect(Array.isArray(auth)).toBeTruthy();
       expect(fakeTaskRepository.getByUserId).toHaveBeenCalledWith({ userId: validUserFixture.userId });
     });
 
-    it('should call getAll then role user is invalid', async () => {
+    it('should not call repository then role user is invalid', async () => {
       const validUserFixture = {
         userId: 3,
         role: 'NONE'
       };
 
-      await expect(taskDomain.get(validUserFixture)).rejects.toThrowError('Your role NONE does not exist');
+      await expect(taskDomain.list(validUserFixture)).rejects.toThrowError('Your role NONE does not exist');
       expect(fakeTaskRepository.getByUserId).not.toHaveBeenCalled();
       expect(fakeTaskRepository.getByUserId).not.toHaveBeenCalled();
     });

@@ -2,8 +2,8 @@ const { attributes } = require('structure');
 
 const taskDomain = ({ logger, taskRepository }) => {
   const MAP_TASK_GET = {
-    DEV: taskRepository.getByUserId,
-    MANAGER: taskRepository.getAll
+    DEV: taskRepository.listByUserId,
+    MANAGER: taskRepository.listAll
   };
 
   const LIST_ROLES_WITH_EXCLUSION = ['MANAGER'];
@@ -29,7 +29,7 @@ const taskDomain = ({ logger, taskRepository }) => {
     return { valid, errors, data: task.toJSON() };
   };
 
-  const get = async ({ userId, role }) => {
+  const list = async ({ userId, role }) => {
     const find = MAP_TASK_GET[`${role}`];
 
     if (!find) {
@@ -89,7 +89,7 @@ const taskDomain = ({ logger, taskRepository }) => {
   };
 
   return {
-    get,
+    list,
     remove,
     save,
     validate,

@@ -1,5 +1,5 @@
 const taskRepository = ({ database }) => {
-  const getAll = async () =>
+  const listAll = async () =>
     await database.task.findMany({
       include: {
         user: {
@@ -10,7 +10,7 @@ const taskRepository = ({ database }) => {
       }
     });
 
-  const getByUserId = async ({ userId }) =>
+  const listByUserId = async ({ userId }) =>
     await database.task.findMany({
       where: { userId }
     });
@@ -33,8 +33,8 @@ const taskRepository = ({ database }) => {
     });
 
   return {
-    getAll,
-    getByUserId,
+    listAll,
+    listByUserId,
     remove,
     save,
     update
