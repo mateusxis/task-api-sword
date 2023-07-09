@@ -86,20 +86,27 @@ describe('UserDomain', () => {
       userRepository: fakeUserRepository
     });
     it('should return data properly', async () => {
-      await userDomain.save({ ...validUserFixture });
+      await userDomain.save({ ...validUserFixture, email: 'foo@bar.com' });
 
       expect(fakeEncryption.encryptPassword).toHaveBeenCalledWith(validUserFixture.password);
       expect(fakeUserRepository.save).toHaveBeenCalledWith({
         name: validUserFixture.name,
-        email: validUserFixture.email,
+        email: 'foo@bar.com',
         password: validUserFixture.password,
         role: validUserFixture.role
       });
     });
 
+    it('should not call repository then email is existed', async () => {
+      await expect(userDomain.save({ ...validUserFixture })).rejects.toThrowError(
+        `existed user`
+      );
+      expect(fakeUserRepository.save).not.toHaveBeenCalled();
+    });
+
     it('should not call repository then email is undefined', async () => {
       await expect(userDomain.save({ name: validUserFixture.name, password: validUserFixture.password })).rejects.toThrowError(
-        `There are one or more invalid fields`
+        `there are one or more invalid fields`
       );
       expect(fakeUserRepository.save).not.toHaveBeenCalled();
     });
