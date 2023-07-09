@@ -33,7 +33,7 @@ const taskDomain = ({ logger, taskRepository }) => {
     const find = MAP_TASK_GET[`${role}`];
 
     if (!find) {
-      const error = new Error(`your role ${role} does not exist`);
+      const error = new Error(`your role does not exist`);
       logger.error(error);
       throw error;
     }
@@ -45,7 +45,7 @@ const taskDomain = ({ logger, taskRepository }) => {
 
   const remove = async ({ id, role }) => {
     if (!LIST_ROLES_WITH_EXCLUSION.includes(role)) {
-      const error = new Error(`you don't have permission to delete task ${id}`);
+      const error = new Error('you do not have permission to delete task');
       logger.error(error);
       throw error;
     }

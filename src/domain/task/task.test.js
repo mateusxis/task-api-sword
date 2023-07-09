@@ -78,7 +78,7 @@ describe('TaskDomain', () => {
         role: 'NONE'
       };
 
-      await expect(taskDomain.list(validUserFixture)).rejects.toThrowError('your role NONE does not exist');
+      await expect(taskDomain.list(validUserFixture)).rejects.toThrowError('your role does not exist');
       expect(fakeTaskRepository.listByUserId).not.toHaveBeenCalled();
       expect(fakeTaskRepository.listByUserId).not.toHaveBeenCalled();
     });
@@ -101,7 +101,7 @@ describe('TaskDomain', () => {
 
     it('should not call remove then role user is invalid', async () => {
       await expect(taskDomain.remove({ id: 1, role: 'DEV' })).rejects.toThrowError(
-        `you don't have permission to delete task 1`
+        'you do not have permission to delete task'
       );
       expect(fakeTaskRepository.remove).not.toHaveBeenCalled();
     });

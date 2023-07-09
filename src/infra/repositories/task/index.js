@@ -22,7 +22,7 @@ const taskRepository = ({ database }) => {
       }
     });
 
-  const save = async (task = {}) => await database.task.save(task);
+  const save = async (task = {}) => await database.task.create({ data: task });
 
   const update = async (task = {}) =>
     await database.task.update({
