@@ -1,5 +1,11 @@
 const userRepository = ({ database }) => {
-  const get = async ({ email }) =>
+  const getById = async ({ id }) =>
+    await database.user.findUnique({
+      where: { id }
+    });
+
+
+  const getByEmail = async ({ email }) =>
     await database.user.findUnique({
       where: { email }
     });
@@ -7,7 +13,8 @@ const userRepository = ({ database }) => {
   const save = async (user = {}) => await database.user.save(user);
 
   return {
-    get,
+    getById,
+    getByEmail,
     save
   };
 };
