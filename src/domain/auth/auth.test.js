@@ -87,7 +87,7 @@ describe('AuthDomain', () => {
         password: validUserFixture.password
       };
 
-      await expect(authDomain.login(invalidEmailFixture)).rejects.toThrowError('Invalid email or password');
+      await expect(authDomain.login(invalidEmailFixture)).rejects.toThrowError('invalid email or password');
     });
 
     it('should fail with invalid password', async () => {
@@ -96,7 +96,7 @@ describe('AuthDomain', () => {
         password: 'OtherPassword'
       };
 
-      await expect(authDomain.login(invalidPasswordFixture)).rejects.toThrowError('Invalid credentials');
+      await expect(authDomain.login(invalidPasswordFixture)).rejects.toThrowError('invalid credentials');
       expect(fakeEncryption.comparePassword).toHaveBeenCalledWith(
         invalidPasswordFixture.password,
         validUserFixture.password
