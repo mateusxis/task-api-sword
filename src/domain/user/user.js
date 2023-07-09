@@ -42,13 +42,26 @@ const userDomain = ({ encryption, logger, userRepository }) => {
     const { valid, errors, data } = validate({ name, email, password, role });
     if (!valid) {
       logger.error(errors);
-      const error = new Error('There are one or more invalid fields');
+      const error = new Error('there are one or more invalid fields');
       error.errors = errors;
       throw error;
     }
 
+    const existedUser = await userRepository.getByEmail({ email: data.email });
+
+    if (existedUser) {
+      const error = new Error('existed user');
+      logger.error({ message: error.message });
+      throw error;
+    }
+
     const encryptedPassword = encryption.encryptPassword(password);
-    const user = await userRepository.save({ name: data.name, email: data.email, password: encryptedPassword, role: data.role });
+    const user = await userRepository.save({
+      name: data.name,
+      email: data.email,
+      password: encryptedPassword,
+      role: data.role
+    });
     delete user.password;
 
     return user;
