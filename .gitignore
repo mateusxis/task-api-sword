@@ -26,6 +26,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env.mysql
 .env.test
 
 # Caches directories
