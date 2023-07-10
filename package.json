@@ -20,7 +20,8 @@
     "lint": "eslint .",
     "format": "prettier --write **/*.{js,json,md}",
     "prepare": "husky install",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "migrate:database": "prisma migrate deploy"
   },
   "lint-staged": {
     "*.js": [
