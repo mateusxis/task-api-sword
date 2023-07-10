@@ -14,9 +14,9 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Task` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `summary` VARCHAR(2500) NOT NULL,
+    `summary` VARCHAR(2500) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `executedAt` DATETIME(3) NOT NULL,
+    `executedAt` DATETIME(3) NULL,
     `userId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
