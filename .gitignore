@@ -34,3 +34,5 @@ node_modules/
 
 ### Jetbrains ###
 .idea/
+
+nsq_data/*.dat

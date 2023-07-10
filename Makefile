@@ -41,7 +41,21 @@ restart: ## Restart the Server
 
 start-database:
 	@echo 'Running database server'
-	@docker run --name mysql -d --env-file=.env.mysql -p 3307:3306  --restart unless-stopped  mysql:8
+	@docker run --rm --name mysql -d --env-file=.env.mysql -p 3307:3306 mysql:8
+
+stop-database:
+	@docker stop mysql
+
+build-docker-image-nsq:
+	@echo 'Building nsq docker image from Dockerfile'
+	@docker build -t dev/nsq:latest - < ./Dockerfile_nsq
+
+start-nsq:
+	@echo 'Running NSQ server'
+	@docker run --rm -d -v ${PWD}/nsq_data:/data -p 4150:4150 -p 4151:4151 -p 4160:4160  -p 4161:4161 -p 4170:4170 -p 4171:4171 --name nsq  dev/nsq:latest
+
+stop-nsq:
+	@docker stop nsq
 
 help: welcome
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | grep ^help -v | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
