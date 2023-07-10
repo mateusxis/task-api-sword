@@ -18,6 +18,7 @@
     "test": "jest --passWithNoTests",
     "test:coverage": "yarn test --coverage",
     "lint": "eslint .",
+    "format": "prettier --write **/*.{js,json,md}",
     "prepare": "husky install",
     "lint:staged": "lint-staged"
   },

@@ -5,7 +5,7 @@ const helmet = require('koa-helmet');
 const authMiddleware = require('./auth');
 const loggerMiddleware = require('./logger');
 
-module.exports = ({ authentication,config }) => ({
+module.exports = ({ authentication, config }) => ({
   bodyParserMiddleware: () => bodyParser({ enableTypes: ['json'] }),
   compressMiddleware: compress,
   corsMiddleware: () =>
@@ -15,6 +15,6 @@ module.exports = ({ authentication,config }) => ({
       allowedHeaders: ['Content-Type', 'Authorization']
     }),
   helmetMiddleware: helmet,
-  authMiddleware: authMiddleware({authentication}),
+  authMiddleware: authMiddleware({ authentication }),
   loggerMiddleware
 });

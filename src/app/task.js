@@ -10,7 +10,7 @@ const taskService = ({ taskDomain }) => {
 
     return task;
   };
-  
+
   const save = async ({ userId, summary }) => {
     const task = await taskDomain.save({ userId, summary });
 
