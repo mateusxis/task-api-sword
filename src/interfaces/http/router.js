@@ -3,6 +3,7 @@ const Router = require('koa-router');
 
 module.exports = ({ database, logger, authController, taskController, userController, middlewares }) => {
   const router = new Router();
+  const getIdentifier = (origin) => `Router ${origin}`;
 
   router.post('/login', authController.login);
 
@@ -10,7 +11,7 @@ module.exports = ({ database, logger, authController, taskController, userContro
   router.post('/tasks', middlewares.authMiddleware, taskController.save);
   router.put('/tasks/:id', middlewares.authMiddleware, taskController.update);
   router.delete('/tasks/:id', middlewares.authMiddleware, taskController.remove);
-  
+
   router.post('/users', userController.save);
   router.get('/me', middlewares.authMiddleware, userController.get);
 
@@ -25,7 +26,7 @@ module.exports = ({ database, logger, authController, taskController, userContro
     try {
       databaseReadiness = await database.$metrics.json();
     } catch (err) {
-      logger.error(err);
+      logger.error(err.message, { errors: err, identifier: getIdentifier('readiness') });
     }
 
     const readiness = Boolean(databaseReadiness);

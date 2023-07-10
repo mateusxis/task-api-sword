@@ -12,18 +12,14 @@ const authController = ({ authService }) => {
       switch (err.message) {
         case 'invalid credentials':
           ctx.status = FORBIDDEN;
-          ctx.body = err;
           break;
-          
         case 'invalid email or password':
           ctx.status = BAD_REQUEST;
-          ctx.body = err;
           break;
-
         default:
           ctx.status = INTERNAL_SERVER_ERROR;
-          ctx.body = err;
       }
+      ctx.body = err;
     }
   };
 

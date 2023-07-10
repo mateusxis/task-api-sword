@@ -13,6 +13,8 @@ const authDomain = ({ authentication, encryption, logger, userRepository }) => {
     }
   })(class Auth {});
 
+  const getIdentifier = (origin) => `AuthDomain ${origin}`;
+
   const validate = ({ email, password }) => {
     const auth = new Auth({ email, password });
     const { valid, errors } = auth.validate({ email, password });
@@ -23,9 +25,9 @@ const authDomain = ({ authentication, encryption, logger, userRepository }) => {
   const login = async ({ email, password }) => {
     const { valid, errors, data } = validate({ email, password });
     if (!valid) {
-      logger.error(errors);
-      const error = new Error('invalid email or password.');
+      const error = new Error('invalid email or password');
       error.errors = errors;
+      logger.error(error.message, { identifier: getIdentifier('login'), errors });
       throw error;
     }
 
@@ -33,7 +35,11 @@ const authDomain = ({ authentication, encryption, logger, userRepository }) => {
     const { password: encryptedPassword } = user;
     delete user.password;
 
-    if (!encryption.comparePassword(data.password, encryptedPassword)) throw new Error('invalid credentials');
+    if (!encryption.comparePassword(data.password, encryptedPassword)) {
+      const error = new Error('invalid credentials');
+      logger.error(error.message, { identifier: getIdentifier('login') });
+      throw error;
+    }
 
     const token = authentication.generate(user);
 

@@ -24,6 +24,8 @@ const userDomain = ({ encryption, logger, userRepository }) => {
     createdAt: Date
   })(class User {});
 
+  const getIdentifier = (origin) => `UserDomain ${origin}`;
+
   const validate = ({ id, name, password, email, role, createdAt }) => {
     const user = new User({ id, name, password, email, role, createdAt });
     const { valid, errors } = user.validate({ id, name, password, email, role, createdAt });
@@ -41,9 +43,9 @@ const userDomain = ({ encryption, logger, userRepository }) => {
   const save = async ({ name, email, password, role }) => {
     const { valid, errors, data } = validate({ name, email, password, role });
     if (!valid) {
-      logger.error(errors);
       const error = new Error('there are one or more invalid fields');
       error.errors = errors;
+      logger.error(error.message, { identifier: getIdentifier('saveUser'), errors });
       throw error;
     }
 
@@ -51,7 +53,7 @@ const userDomain = ({ encryption, logger, userRepository }) => {
 
     if (existedUser) {
       const error = new Error('existed user');
-      logger.error({ message: error.message });
+      logger.error(error.message, { identifier: getIdentifier('saveUser') });
       throw error;
     }
 

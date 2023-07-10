@@ -27,15 +27,13 @@ const userController = ({ userService }) => {
         case 'existed user':
           ctx.status = CONFLICT;
           break;
-
         case 'there are one or more invalid fields':
           ctx.status = BAD_REQUEST;
           break;
-
         default:
           ctx.status = INTERNAL_SERVER_ERROR;
-        }
-        ctx.body = err;
+      }
+      ctx.body = err;
     }
   };
 

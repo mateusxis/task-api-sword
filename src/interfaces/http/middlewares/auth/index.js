@@ -14,11 +14,9 @@ const authMiddleware = ({ authentication }) => {
         case 'jwt expired':
           ctx.status = FORBIDDEN;
           break;
-
         case 'invalid signature':
           ctx.status = BAD_REQUEST;
           break;
-
         default:
           ctx.status = INTERNAL_SERVER_ERROR;
       }

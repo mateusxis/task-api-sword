@@ -13,7 +13,6 @@ const taskController = ({ taskService }) => {
         case 'your role does not exist':
           ctx.status = BAD_REQUEST;
           break;
-
         default:
           ctx.status = INTERNAL_SERVER_ERROR;
       }
@@ -35,7 +34,6 @@ const taskController = ({ taskService }) => {
         case 'you do not have permission to delete task':
           ctx.status = FORBIDDEN;
           break;
-
         default:
           ctx.status = INTERNAL_SERVER_ERROR;
       }
@@ -57,7 +55,6 @@ const taskController = ({ taskService }) => {
         case 'there are one or more invalid fields':
           ctx.status = BAD_REQUEST;
           break;
-
         default:
           ctx.status = INTERNAL_SERVER_ERROR;
       }
@@ -79,7 +76,6 @@ const taskController = ({ taskService }) => {
         case 'there are one or more invalid fields':
           ctx.status = BAD_REQUEST;
           break;
-
         default:
           ctx.status = INTERNAL_SERVER_ERROR;
       }

@@ -22,6 +22,8 @@ const taskDomain = ({ logger, taskRepository }) => {
     createdAt: Date
   })(class Task {});
 
+  const getIdentifier = (origin) => `TaskDomain ${origin}`;
+
   const validate = ({ id, summary, userId, executedAt, createdAt }) => {
     const task = new Task({ id, summary, userId, executedAt, createdAt });
     const { valid, errors } = task.validate({ id, summary, userId, executedAt, createdAt });
@@ -34,7 +36,10 @@ const taskDomain = ({ logger, taskRepository }) => {
 
     if (!find) {
       const error = new Error(`your role does not exist`);
-      logger.error(error);
+      logger.error(error.message, {
+        identifier: getIdentifier('listTasks'),
+        params: { userId, role }
+      });
       throw error;
     }
 
@@ -46,7 +51,10 @@ const taskDomain = ({ logger, taskRepository }) => {
   const remove = async ({ id, role }) => {
     if (!LIST_ROLES_WITH_EXCLUSION.includes(role)) {
       const error = new Error('you do not have permission to delete task');
-      logger.error(error);
+      logger.error(error.message, {
+        identifier: getIdentifier('removeTask'),
+        params: { id, role }
+      });
       throw error;
     }
 
@@ -58,9 +66,9 @@ const taskDomain = ({ logger, taskRepository }) => {
   const save = async ({ summary, userId }) => {
     const { valid, errors, data } = validate({ userId, summary });
     if (!valid) {
-      logger.error(errors);
       const error = new Error('there are one or more invalid fields');
       error.errors = errors;
+      logger.error(error.message, { identifier: getIdentifier('saveTask'), errors, params: { summary, userId } });
       throw error;
     }
 
@@ -72,9 +80,13 @@ const taskDomain = ({ logger, taskRepository }) => {
   const update = async ({ summary, executedAt, userId, id }) => {
     const { valid, errors, data } = validate({ summary, executedAt, userId, id });
     if (!valid) {
-      logger.error(errors);
       const error = new Error('there are one or more invalid fields');
       error.errors = errors;
+      logger.error(error.message, {
+        identifier: getIdentifier('updateTask'),
+        errors,
+        params: { summary, executedAt, userId, id }
+      });
       throw error;
     }
 
