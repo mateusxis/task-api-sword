@@ -32,6 +32,13 @@ const authDomain = ({ authentication, encryption, logger, userRepository }) => {
     }
 
     const user = await userRepository.getByEmail({ email: data.email });
+
+    if (!user) {
+      const error = new Error('user not found');
+      logger.error(error.message, { identifier: getIdentifier('login') });
+      throw error;
+    }
+
     const { password: encryptedPassword } = user;
     delete user.password;
 

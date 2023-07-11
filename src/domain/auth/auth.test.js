@@ -103,5 +103,16 @@ describe('AuthDomain', () => {
       );
       expect(fakeUserRepository.getByEmail).toHaveBeenCalledWith({ email: validUserFixture.email });
     });
+
+    it('should fail when user does not existed', async () => {
+      const validAuthFixture = {
+        email: 'test@example.com',
+        password: 'testPassword'
+      };
+
+      fakeUserRepository.getByEmail.mockImplementationOnce(() => null);
+
+      await expect(authDomain.login(validAuthFixture)).rejects.toThrowError('user not found');
+    });
   });
 });
