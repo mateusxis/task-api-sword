@@ -42,11 +42,11 @@ const taskController = ({ taskService }) => {
   };
 
   const save = async (ctx) => {
-    const { summary } = ctx.request.body;
-    const { id: userId } = ctx.state.user;
+    const { executedAt, summary, title } = ctx.request.body;
+    const { user } = ctx.state;
 
     try {
-      const task = await taskService.save({ userId, summary });
+      const task = await taskService.save({ user, task: { executedAt, summary, title } });
 
       ctx.status = CREATED;
       ctx.body = task;
@@ -64,10 +64,11 @@ const taskController = ({ taskService }) => {
 
   const update = async (ctx) => {
     const { id } = ctx.params;
-    const { summary, executedAt, userId } = ctx.request.body;
+    const { executedAt, summary, title } = ctx.request.body;
+    const { user } = ctx.state;
 
     try {
-      const task = await taskService.update({ summary, executedAt, userId, id });
+      const task = await taskService.update({ user, task: { id, executedAt, summary, title } });
 
       ctx.status = OK;
       ctx.body = task;

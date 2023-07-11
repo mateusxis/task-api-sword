@@ -7,9 +7,15 @@ const taskDomain = ({ logger, taskRepository }) => {
   };
 
   const LIST_ROLES_WITH_EXCLUSION = ['MANAGER'];
+  const LIST_ROLES_WITH_UPDATE = ['DEV'];
+  const LIST_ROLES_WITH_CREATE = ['DEV'];
 
   const Task = attributes({
     id: Number,
+    title: {
+      type: String,
+      maxLength: 150
+    },
     summary: {
       type: String,
       maxLength: 2500
@@ -18,15 +24,16 @@ const taskDomain = ({ logger, taskRepository }) => {
       type: Number,
       required: true
     },
+    createdAt: Date,
     executedAt: Date,
-    createdAt: Date
+    updatedAt: Date
   })(class Task {});
 
   const getIdentifier = (origin) => `TaskDomain ${origin}`;
 
-  const validate = ({ id, summary, userId, executedAt, createdAt }) => {
-    const task = new Task({ id, summary, userId, executedAt, createdAt });
-    const { valid, errors } = task.validate({ id, summary, userId, executedAt, createdAt });
+  const validate = ({ id, summary, title, userId, executedAt, createdAt, updatedAt }) => {
+    const task = new Task({ id, summary, title, userId, executedAt, createdAt, updatedAt });
+    const { valid, errors } = task.validate({ id, summary, title, userId, executedAt, createdAt, updatedAt });
 
     return { valid, errors, data: task.toJSON() };
   };
@@ -63,35 +70,63 @@ const taskDomain = ({ logger, taskRepository }) => {
     return task;
   };
 
-  const save = async ({ summary, userId }) => {
-    const { valid, errors, data } = validate({ userId, summary });
-    if (!valid) {
-      const error = new Error('there are one or more invalid fields');
-      error.errors = errors;
-      logger.error(error.message, { identifier: getIdentifier('saveTask'), errors, params: { summary, userId } });
+  const save = async ({ executedAt, summary, title, userId, role }) => {
+    if (!LIST_ROLES_WITH_CREATE.includes(role)) {
+      const error = new Error('you do not have permission to create task');
+      logger.error(error.message, {
+        identifier: getIdentifier('saveTask'),
+        params: { executedAt, summary, title, userId, role }
+      });
       throw error;
     }
 
-    const task = await taskRepository.save({ userId: data.userId, summary: data.summary });
+    const { valid, errors, data } = validate({ executedAt, summary, title, userId });
+    if (!valid) {
+      const error = new Error('there are one or more invalid fields');
+      error.errors = errors;
+      logger.error(error.message, {
+        identifier: getIdentifier('saveTask'),
+        errors,
+        params: { executedAt, summary, title, userId }
+      });
+      throw error;
+    }
+
+    const task = await taskRepository.save({
+      userId: data.userId,
+      summary: data.summary,
+      title: data.title,
+      executedAt: data.executedAt
+    });
 
     return task;
   };
 
-  const update = async ({ summary, executedAt, userId, id }) => {
-    const { valid, errors, data } = validate({ summary, executedAt, userId, id });
+  const update = async ({ id, executedAt, summary, title, userId, role }) => {
+    if (!LIST_ROLES_WITH_UPDATE.includes(role)) {
+      const error = new Error('you do not have permission to update task');
+      logger.error(error.message, {
+        identifier: getIdentifier('updateTask'),
+        params: { id, executedAt, summary, title, userId, role }
+      });
+      throw error;
+    }
+
+    const { valid, errors, data } = validate({ id, executedAt, summary, title, userId });
     if (!valid) {
       const error = new Error('there are one or more invalid fields');
       error.errors = errors;
       logger.error(error.message, {
         identifier: getIdentifier('updateTask'),
         errors,
-        params: { summary, executedAt, userId, id }
+        params: { id, executedAt, summary, title, userId }
       });
       throw error;
     }
 
     const task = await taskRepository.update({
       summary: data.summary,
+      title: data.title,
       executedAt: data.executedAt,
       userId: data.userId,
       id: data.id

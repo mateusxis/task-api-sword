@@ -4,6 +4,7 @@ const fakeLogger = require('../__mocks__/fakeLogger');
 const fakeTaskRepository = require('../__mocks__/fakeTaskRepository');
 const validTaskFixture = require('../__fixtures__/validTask.json');
 const largerSummaryTaskFixture = require('../__fixtures__/largerSummaryTask.json');
+const largerTitleTaskFixture = require('../__fixtures__/largerTitleTask.json');
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -22,17 +23,27 @@ describe('TaskDomain', () => {
       expect(valid).toBeTruthy();
       expect(data.id).toEqual(validTaskFixture.id);
       expect(data.summary).toEqual(validTaskFixture.summary);
+      expect(data.title).toEqual(validTaskFixture.title);
       expect(data.userId).toEqual(validTaskFixture.userId);
       expect(data.executedAt).toEqual(new Date(validTaskFixture.executedAt));
+      expect(data.updatedAt).toEqual(new Date(validTaskFixture.updatedAt));
       expect(data.createdAt).toEqual(new Date(validTaskFixture.createdAt));
     });
 
-    it('should fail with invalid email address', () => {
+    it('should fail when summary is larger', () => {
       const { valid, errors } = taskDomain.validate(largerSummaryTaskFixture);
 
       expect(valid).toBeFalsy();
       expect(Array.isArray(errors)).toBeTruthy();
       expect(errors[0].message).toEqual('"summary" length must be less than or equal to 2500 characters long');
+    });
+
+    it('should fail when title is larger', () => {
+      const { valid, errors } = taskDomain.validate(largerTitleTaskFixture);
+
+      expect(valid).toBeFalsy();
+      expect(Array.isArray(errors)).toBeTruthy();
+      expect(errors[0].message).toEqual('"title" length must be less than or equal to 150 characters long');
     });
 
     it('should fail when all fields are not provided or empty', () => {
@@ -115,18 +126,30 @@ describe('TaskDomain', () => {
 
     it('should call repository with task to save', async () => {
       await taskDomain.save({
+        executedAt: validTaskFixture.executedAt,
+        summary: validTaskFixture.summary,
+        title: validTaskFixture.title,
         userId: validTaskFixture.userId,
-        summary: validTaskFixture.summary
+        role: 'DEV'
       });
 
       expect(fakeTaskRepository.save).toHaveBeenCalledWith({
-        userId: validTaskFixture.userId,
-        summary: validTaskFixture.summary
+        executedAt: new Date(validTaskFixture.executedAt),
+        summary: validTaskFixture.summary,
+        title: validTaskFixture.title,
+        userId: validTaskFixture.userId
       });
     });
 
+    it('should not call save then role user is invalid', async () => {
+      await expect(taskDomain.save({ id: 1, role: 'MANAGER' })).rejects.toThrowError(
+        'you do not have permission to create task'
+      );
+      expect(fakeTaskRepository.save).not.toHaveBeenCalled();
+    });
+
     it('should not call repository then userId is undefined', async () => {
-      await expect(taskDomain.save({ summary: validTaskFixture.summary })).rejects.toThrowError(
+      await expect(taskDomain.save({ summary: validTaskFixture.summary, role: 'DEV' })).rejects.toThrowError(
         `there are one or more invalid fields`
       );
       expect(fakeTaskRepository.save).not.toHaveBeenCalled();
@@ -140,27 +163,38 @@ describe('TaskDomain', () => {
     });
 
     it('should call repository with task to update', async () => {
-      const { summary, executedAt, userId, id } = validTaskFixture;
+      const { summary, executedAt, userId, id, title } = validTaskFixture;
 
       await taskDomain.update({
         summary,
         executedAt,
         userId,
-        id
+        title,
+        id,
+        role: 'DEV'
       });
 
       expect(fakeTaskRepository.update).toHaveBeenCalledWith({
         summary,
         executedAt: new Date(executedAt),
+        title,
+        // updatedAt: new Date(),
         userId,
         id
       });
     });
 
+    it('should not call update then role user is invalid', async () => {
+      await expect(taskDomain.update({ id: 1, role: 'MANAGER' })).rejects.toThrowError(
+        'you do not have permission to update task'
+      );
+      expect(fakeTaskRepository.update).not.toHaveBeenCalled();
+    });
+
     it('should not call repository then userId is undefined', async () => {
       const { summary, executedAt, id } = validTaskFixture;
 
-      await expect(taskDomain.update({ summary, executedAt, id })).rejects.toThrowError(
+      await expect(taskDomain.update({ summary, executedAt, id, role: 'DEV' })).rejects.toThrowError(
         `there are one or more invalid fields`
       );
       expect(fakeTaskRepository.update).not.toHaveBeenCalled();

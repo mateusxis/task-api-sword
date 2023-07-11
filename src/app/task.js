@@ -11,14 +11,14 @@ const taskService = ({ taskDomain }) => {
     return task;
   };
 
-  const save = async ({ userId, summary }) => {
-    const task = await taskDomain.save({ userId, summary });
+  const save = async ({ user, task: { executedAt, summary, title } }) => {
+    const task = await taskDomain.save({ executedAt, summary, title, userId: user.id, role: user.role });
 
     return task;
   };
 
-  const update = async ({ summary, executedAt, userId, id }) => {
-    const task = await taskDomain.update({ summary, executedAt, userId, id });
+  const update = async ({ user, task: { id, executedAt, summary, title, userId } }) => {
+    const task = await taskDomain.update({ id, executedAt, summary, title, userId: userId.id, role: user.role });
 
     return task;
   };
