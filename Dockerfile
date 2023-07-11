@@ -7,7 +7,7 @@ FROM node:18-slim as base
 
     RUN apt-get update && \
         apt-get upgrade -y && \
-        apt-get install -y `cat /tmp/requirements.apt` && \
+        apt-get install -y build-essential curl make python3 git openssl && \
         apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 FROM base as development
