@@ -13,6 +13,8 @@ beforeEach(() => {
   process.env.LOGGING_COLORIZE = '0';
   process.env.LOGGING_MAX_FILES = '2';
   process.env.LOGGING_MAX_SIZE = '102400';
+  process.env.NSQ_SERVER_ADDRESS = 'http://localhost';
+  process.env.NSQ_SERVER_PORT = 4150;
   process.env.SERVER_PORT = 3000;
 
   jest.resetAllMocks();
@@ -31,6 +33,10 @@ describe('config()', () => {
         colorize: false,
         maxFiles: 2,
         maxsize: 102400
+      },
+      nsq: {
+        serverAddress: 'http://localhost',
+        serverPort: 4150
       },
       nodeEnv: 'development',
       serverPort: 3000
@@ -104,6 +110,20 @@ describe('config()', () => {
       delete process.env.LOGGING_MAX_SIZE;
 
       expect(() => config()).toThrowError('"LOGGING_MAX_SIZE" must be defined.');
+    });
+  });
+
+  describe('messaging', () => {
+    it('should throw error when server address variable is missing', () => {
+      delete process.env.NSQ_SERVER_ADDRESS;
+
+      expect(() => config()).toThrowError('"NSQ_SERVER_ADDRESS" must be defined.');
+    });
+
+    it('should throw error when server port variable is missing', () => {
+      delete process.env.NSQ_SERVER_PORT;
+
+      expect(() => config()).toThrowError('"NSQ_SERVER_PORT" must be defined.');
     });
   });
 });

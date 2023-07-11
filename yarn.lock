@@ -674,10 +674,186 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
+"@napi-rs/snappy-android-arm64@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-android-arm64/-/snappy-android-arm64-1.0.2.tgz#98897013e3f1fd49eec90262b3928743067768a3"
+  integrity sha512-I7VLnv6lJDquMX3AlC8JZREUplxOyPrqCeTLOg8eojISByyjCdEbn8xPzr8sdz2AF9fqzhqC3Hs9SOw3CtP/xg==
+
+"@napi-rs/snappy-darwin-arm64@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-darwin-arm64/-/snappy-darwin-arm64-1.0.2.tgz#95cff8e68e6dab36bde25fbcf9475cc87fcdc16e"
+  integrity sha512-bORHtrSu8zYklG5JyxOU2wseRo3tj8+WioP28M8TBseYVLrd+zckLVAia5J89NJD08LwJUdH/yW8VV3s+u8aLA==
+
+"@napi-rs/snappy-darwin-x64@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-darwin-x64/-/snappy-darwin-x64-1.0.2.tgz#40ecf4496f55e084f3114eb4f5a9da6f593311dc"
+  integrity sha512-FaJ2O23ALj7PLlDCOr5Jlzb4F+cGO4dfc+8xFbYC1XdAqvItZD7toRGs8g5sisdWJDRDpcP8jByF7XK2RIOLqQ==
+
+"@napi-rs/snappy-freebsd-x64@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-freebsd-x64/-/snappy-freebsd-x64-1.0.2.tgz#43b32e51e7c838fa39a80d47a00fe769ba91b861"
+  integrity sha512-oc4ahBFXL0zsSmO0bwtrTB8I1RBMNo2YPYlHdAf4SIFaqXkY3DHIDOSsLFSEvgQ0MKkBLZ8gtADheUz1Jr8HDQ==
+
+"@napi-rs/snappy-linux-arm-gnueabihf@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-linux-arm-gnueabihf/-/snappy-linux-arm-gnueabihf-1.0.2.tgz#a7707915c04ebbeb2b286f9efa77e90df27d69a5"
+  integrity sha512-9v4aKeYbdmgsLZBNaCr9Ws7mmtLrMjIeDMc0fytkCil4bmRJG86/nqMgq5jx1zC8waHYRp9GT2Vf53eVW/JXFA==
+
+"@napi-rs/snappy-linux-arm64-gnu@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-linux-arm64-gnu/-/snappy-linux-arm64-gnu-1.0.2.tgz#5c5ae1d0d3982812b7d546d8d247d65b9e7e6135"
+  integrity sha512-TljVpKLrlMzLMP0zW6Teqf2T0BWNvPMlzl/956XIxlEyH2lwNJKTOti/KdOsodamZK2M6zl9hMniao0QVcMHNQ==
+
+"@napi-rs/snappy-linux-arm64-musl@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-linux-arm64-musl/-/snappy-linux-arm64-musl-1.0.2.tgz#1ec4b3caec2adead05a0b2750527e439406d9ec4"
+  integrity sha512-XbIGdGb8r8j2CDCKDqs0FLr8VgQbdIUM5x6OEDjp5Mw3HeSDsDCGmNioJvzQl0t28ftDitE4BUeaMJM6OHYcAw==
+
+"@napi-rs/snappy-linux-x64-gnu@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-linux-x64-gnu/-/snappy-linux-x64-gnu-1.0.2.tgz#aff802428f07a0cc2b73bf56aa3fe28661881be6"
+  integrity sha512-XUJuwM7X7WaQ7TN3orog9/P1B7agDjW84eWbx45MHMalCkf/O14pWeehCBr7PKzQb7DVFNCPG9Z16VNNr2kxMg==
+
+"@napi-rs/snappy-linux-x64-musl@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-linux-x64-musl/-/snappy-linux-x64-musl-1.0.2.tgz#78b8fd5e83ec613580f79e4200d3b1fe463a6d11"
+  integrity sha512-pAPPy+fFCP1gXr7Bbn1Nfsq3875WJdf54ti2oKKf3lgL22+afz9m2dMn1/GuWET1vzCaoGaEjb59J9J11cN8lg==
+
+"@napi-rs/snappy-win32-arm64-msvc@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-win32-arm64-msvc/-/snappy-win32-arm64-msvc-1.0.2.tgz#e8f46b3c055f4418e5f96c45f577bc843df500a0"
+  integrity sha512-2amNgMm8LFhI8KzWlCuHByBKsCiB4c9ur5EY0PZCfbbUL+d8TRcVeHLndgUtgCqT+m+T35LXV6jpL3jF6vS3PQ==
+
+"@napi-rs/snappy-win32-ia32-msvc@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-win32-ia32-msvc/-/snappy-win32-ia32-msvc-1.0.2.tgz#57399ecd56fbde6f1366140e0c77ad859f7380db"
+  integrity sha512-Z0ujqNb6ybi3CBZYV/dKZRQ3V0YqX74xwO0n/vV4FG+kjMbmz1x2O5B+cbpBdYciPLf/oN1EJMEbf/e+csHXig==
+
+"@napi-rs/snappy-win32-x64-msvc@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy-win32-x64-msvc/-/snappy-win32-x64-msvc-1.0.2.tgz#a27a3a91ebbed4a6a00376bed15fa0eddc506891"
+  integrity sha512-mpGGtdJp0+myWzVqtfkKcjdN8rXgN2b8ox6WxEe5CNga/vV8LdIpBl4HgQ4/GTd1PolG9v7eXqnl5Rli+yb8Nw==
+
+"@napi-rs/snappy@^1.0.1":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@napi-rs/snappy/-/snappy-1.0.2.tgz#43dcc7d0578edaf4fa683b713d907f7e8c8aaa36"
+  integrity sha512-QHuTPh/HCmDfXSnswisrfpq20rwRh5Xl5pR0BEfR/31cTN3IesH6RD0tcs7/ZuGld+EsT/O9ksDyTEKYOque6g==
+  dependencies:
+    "@node-rs/helper" "^1.2.0"
+  optionalDependencies:
+    "@napi-rs/snappy-android-arm64" "^1.0.2"
+    "@napi-rs/snappy-darwin-arm64" "^1.0.2"
+    "@napi-rs/snappy-darwin-x64" "^1.0.2"
+    "@napi-rs/snappy-freebsd-x64" "^1.0.2"
+    "@napi-rs/snappy-linux-arm-gnueabihf" "^1.0.2"
+    "@napi-rs/snappy-linux-arm64-gnu" "^1.0.2"
+    "@napi-rs/snappy-linux-arm64-musl" "^1.0.2"
+    "@napi-rs/snappy-linux-x64-gnu" "^1.0.2"
+    "@napi-rs/snappy-linux-x64-musl" "^1.0.2"
+    "@napi-rs/snappy-win32-arm64-msvc" "^1.0.2"
+    "@napi-rs/snappy-win32-ia32-msvc" "^1.0.2"
+    "@napi-rs/snappy-win32-x64-msvc" "^1.0.2"
+
+"@napi-rs/triples@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@napi-rs/triples/-/triples-1.1.0.tgz#88c35b72e79a20b79bb4c9b3e2817241a1c9f4f9"
+  integrity sha512-XQr74QaLeMiqhStEhLn1im9EOMnkypp7MZOwQhGzqp2Weu5eQJbpPxWxixxlYRKWPOmJjsk6qYfYH9kq43yc2w==
+
 "@nicolo-ribaudo/semver-v6@^6.3.3":
   version "6.3.3"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/semver-v6/-/semver-v6-6.3.3.tgz#ea6d23ade78a325f7a52750aab1526b02b628c29"
   integrity sha512-3Yc1fUTs69MG/uZbJlLSI3JISMn2UV2rg+1D/vROUqZyh3l6iYHCs7GMp+M40ZD7yOdDbYjJcU1oTJhrc+dGKg==
+
+"@node-rs/crc32-android-arm-eabi@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-android-arm-eabi/-/crc32-android-arm-eabi-1.7.0.tgz#1fe9b0dd88bba50bc4433f9776163c2f63d9797d"
+  integrity sha512-a0ligyBGOUT3xcVPo9Ozt2KdrmHFu9jYj2dxqxWFndEM+R6576tOAq2xBIotmpRgKK30KObPz83FFyul1rksbQ==
+
+"@node-rs/crc32-android-arm64@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-android-arm64/-/crc32-android-arm64-1.7.0.tgz#3d334b94e8c0ce93a9c86a4324c2fd9e63e42e00"
+  integrity sha512-UU0vc7mERSd+SbuKU1uuB3t+t2PS89Z2ehmSwqMfFewIPTLno5OkO7VeNdDSp+qrOv0f/mbB+j2LMhYOIxAU9Q==
+
+"@node-rs/crc32-darwin-arm64@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-darwin-arm64/-/crc32-darwin-arm64-1.7.0.tgz#777782633f5df4a483d3d69e60f22758f377732b"
+  integrity sha512-VJVi5VSihwXz2fwkYaxypR+WaqTtNGJlC3UEN+R41ftvpZ8U/tp48hjLGnWcPApAfnhBEOrEvnpH2Tv4+XVW/Q==
+
+"@node-rs/crc32-darwin-x64@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-darwin-x64/-/crc32-darwin-x64-1.7.0.tgz#0cf09bdbd5f376250ed9868fedc999cb4c711aae"
+  integrity sha512-6W6mPsUB5612A3VIOIVOiWsjtV34Efo4DC7+/Hg/l14F0xVh2agJA8wMpq8jByPZNZ+LV3kunCR7HB2hGY68YQ==
+
+"@node-rs/crc32-freebsd-x64@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-freebsd-x64/-/crc32-freebsd-x64-1.7.0.tgz#bf88f652bfcab96283698830cbc1366aa6ac3fb9"
+  integrity sha512-Roua2jhneDWnKMRoJI7ruHeiimkrbd6U2c0+S42AgL4Io4177B7+DVZoebHvW0ozuAQFqYj9WE8R/uXU88mcpA==
+
+"@node-rs/crc32-linux-arm-gnueabihf@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-linux-arm-gnueabihf/-/crc32-linux-arm-gnueabihf-1.7.0.tgz#1043e12efcfde47f3bb65a3dcdb5da6770eeb424"
+  integrity sha512-6jB+NWDnlcA3tuo9cLCmj2h53btYBurdkHfbcg6RasP0i1c7azE5+J7NXXZyZhUHmzmbf7P+ce6gG3PRQl8ncA==
+
+"@node-rs/crc32-linux-arm64-gnu@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-linux-arm64-gnu/-/crc32-linux-arm64-gnu-1.7.0.tgz#db142ad18b6755db81fd6d61393ee2e5e978b87e"
+  integrity sha512-ZrlmD+sEyuDNQ+SibtwCy1dUn0hD7AM2YYovL5qw7sX6moqodloaipAAlDTyah2YGnhPKZMklgR2dxxj5Um1ag==
+
+"@node-rs/crc32-linux-arm64-musl@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-linux-arm64-musl/-/crc32-linux-arm64-musl-1.7.0.tgz#739d054405d52a883c3b1c4ecedfcf5f5b45fa1c"
+  integrity sha512-81s43ZWAB9xxn4lyyjUlLSXKov1iMkS1RBrfgKXGtaVQLHB0c39qYL4rPvSwicEO3DvZsmHKASlGDgTctl5oag==
+
+"@node-rs/crc32-linux-x64-gnu@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-linux-x64-gnu/-/crc32-linux-x64-gnu-1.7.0.tgz#768669a8e42242ec6c24e17082d8646de5fcac2b"
+  integrity sha512-MpMThABlKf0WDKnJdJ26mUGYTnMOnupNiGKessH93UgyEjq9gZBpbtuXE/9N8PoAl5ItyjjmCsg1g4ZVjuqb6w==
+
+"@node-rs/crc32-linux-x64-musl@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-linux-x64-musl/-/crc32-linux-x64-musl-1.7.0.tgz#55b1c3dbb63d1d320d80dba927e3f701b666cd80"
+  integrity sha512-9EvPtWTLCsxyuNBz7/uLKDlSowgIHZeQRN/lQhw4ez/r6vKE5VQpS8ZtXlAUcSGoloXNxpZ/6zIcv21J7KWhzQ==
+
+"@node-rs/crc32-win32-arm64-msvc@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-win32-arm64-msvc/-/crc32-win32-arm64-msvc-1.7.0.tgz#d6b63259725b3f039778f7e95b7e145f2f2f2af1"
+  integrity sha512-i/IC2TrEBJ3tr44leBUejLbfK22EY7s6AWngspLejh81obvC4GUAUPn13HaNBcTtngjWwLX+V+Q97ibmCNEshA==
+
+"@node-rs/crc32-win32-ia32-msvc@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-win32-ia32-msvc/-/crc32-win32-ia32-msvc-1.7.0.tgz#d5342fc622b3d82dd3d5e9237ddc5a8781a756c4"
+  integrity sha512-nI5MiJfPDX0elHE/sDJGNWNlIYLORKRxhPTLvMp3Z+IdiUHu+6BrH21ymCN5ap+k45acUKAUOb7d9ctjN+9jBg==
+
+"@node-rs/crc32-win32-x64-msvc@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32-win32-x64-msvc/-/crc32-win32-x64-msvc-1.7.0.tgz#657fd077c92a85dd8e579e4f1a4b2013506ba1b6"
+  integrity sha512-TdRNLPQ7DCt401nKU0c9ZbG8ITRO9WG7bV3Xgwgd8eK/jvfuqNC0Oy1o8uTzuagUqqAMXuSNbZ2nsDKARTzvHQ==
+
+"@node-rs/crc32@^1.1.2":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@node-rs/crc32/-/crc32-1.7.0.tgz#08a4148d40e78fff681f86e4013b4870ba12f7d8"
+  integrity sha512-cEvvgaA+amK2LO54E3eHFlXg9kqXR27qTRaQjJyW0Ra2x+aAdbio7CICy7JughiYv6f/79FrTpYdtmsW9jkHjA==
+  optionalDependencies:
+    "@node-rs/crc32-android-arm-eabi" "1.7.0"
+    "@node-rs/crc32-android-arm64" "1.7.0"
+    "@node-rs/crc32-darwin-arm64" "1.7.0"
+    "@node-rs/crc32-darwin-x64" "1.7.0"
+    "@node-rs/crc32-freebsd-x64" "1.7.0"
+    "@node-rs/crc32-linux-arm-gnueabihf" "1.7.0"
+    "@node-rs/crc32-linux-arm64-gnu" "1.7.0"
+    "@node-rs/crc32-linux-arm64-musl" "1.7.0"
+    "@node-rs/crc32-linux-x64-gnu" "1.7.0"
+    "@node-rs/crc32-linux-x64-musl" "1.7.0"
+    "@node-rs/crc32-win32-arm64-msvc" "1.7.0"
+    "@node-rs/crc32-win32-ia32-msvc" "1.7.0"
+    "@node-rs/crc32-win32-x64-msvc" "1.7.0"
+
+"@node-rs/helper@^1.2.0":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@node-rs/helper/-/helper-1.3.3.tgz#2b1953846ddba31bfb7ecf4ba57e7b1359fcdedc"
+  integrity sha512-p4OdfQObGN9YFy5WZaGwlPYICQSe7xZYyXB0sxREmvj1HzGKp5bPg2PlfgfMZEfnjIA882B9ZrnagYzZihIwjA==
+  dependencies:
+    "@napi-rs/triples" "^1.1.0"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -2089,6 +2265,11 @@ inherits@2, inherits@2.0.4, inherits@^2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+int24@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/int24/-/int24-0.0.1.tgz#96cff1430a46557352edb406cd87b3082b369d84"
+  integrity sha512-ejbvNztXZUPwWGY0XbmchjGot2+oRp5dySWFnOS56ZY03x6YuPFpCFdD9PtT9Tw4qifLcbCKd4Rs1iDvNEGIPA==
+
 is-arrayish@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.2.1.tgz#77c99840527aa8ecb1a8ba697b80645a7a926a9d"
@@ -3020,7 +3201,7 @@ node-addon-api@^5.0.0:
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-5.1.0.tgz#49da1ca055e109a23d537e9de43c09cca21eb762"
   integrity sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==
 
-node-fetch@^2.6.7:
+node-fetch@^2.6.1, node-fetch@^2.6.7:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.12.tgz#02eb8e22074018e3d5a83016649d04df0e348fba"
   integrity sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==
@@ -3036,6 +3217,11 @@ node-releases@^2.0.12:
   version "2.0.13"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.13.tgz#d5ed1627c23e3461e819b02e57b75e4899b1c81d"
   integrity sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==
+
+node-state@~1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/node-state/-/node-state-1.4.4.tgz#e5e62d86167e2da87238ac86fcf532dfe36cadb9"
+  integrity sha512-t7xAS3BK9uliXU5tfaV7B5M1EACAhQV4J1367Huq1liMX87EyrxpjjayTcsIrBO2lO8xJJqNrL1oGe+udvrZ6A==
 
 nodemon@^2.0.22:
   version "2.0.22"
@@ -3095,6 +3281,17 @@ npmlog@^5.0.1:
     console-control-strings "^1.1.0"
     gauge "^3.0.0"
     set-blocking "^2.0.0"
+
+nsqjs@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/nsqjs/-/nsqjs-0.13.0.tgz#b4aebee398bf9015f643d9633575768a18c45fbb"
+  integrity sha512-h4sZoJu8qumYYGLts9ObWl+eK3BzkbBuE7UhrQYkLMQvaeHXFlGfBXB5IcgNBRQVOuEVRfT/1V4bPpgiJyN/RQ==
+  dependencies:
+    lodash "^4.17.15"
+    node-fetch "^2.6.1"
+    node-state "~1.4.4"
+  optionalDependencies:
+    snappystream "^2.0.0"
 
 object-assign@^4.1.1:
   version "4.1.1"
@@ -3603,6 +3800,15 @@ slice-ansi@^5.0.0:
   dependencies:
     ansi-styles "^6.0.0"
     is-fullwidth-code-point "^4.0.0"
+
+snappystream@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/snappystream/-/snappystream-2.0.0.tgz#ab6a60a185281ee60aad2328e381a28e937f43cd"
+  integrity sha512-Uu8wVCmd4R7W46HfHd6+E0kIFZlZ80heUyUyaCePhvIPCJF+uzpeAry5/6WNmeqx8SJiSdr0N635qUtL3AqzWg==
+  dependencies:
+    "@napi-rs/snappy" "^1.0.1"
+    "@node-rs/crc32" "^1.1.2"
+    int24 "0.0.1"
 
 source-map-support@0.5.13:
   version "0.5.13"

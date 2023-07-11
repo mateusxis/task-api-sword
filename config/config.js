@@ -38,6 +38,16 @@ module.exports = () => {
     };
   };
 
+  const getNSQ = () => {
+    assert(process.env.NSQ_SERVER_ADDRESS, '"NSQ_SERVER_ADDRESS" must be defined.');
+    assert(process.env.NSQ_SERVER_PORT, '"NSQ_SERVER_PORT" must be defined.');
+
+    return {
+      serverAddress: process.env.NSQ_SERVER_ADDRESS,
+      serverPort: parseInt(process.env.NSQ_SERVER_PORT, 10)
+    };
+  };
+
   const getServerPort = () => {
     assert(process.env.SERVER_PORT, '"SERVER_PORT" must be defined.');
 
@@ -50,6 +60,7 @@ module.exports = () => {
     databaseUrl: getDatabaseUrl(),
     nodeEnv: getNodeEnv(),
     serverPort: getServerPort(),
-    logging: getLogging()
+    logging: getLogging(),
+    nsq: getNSQ()
   };
 };
