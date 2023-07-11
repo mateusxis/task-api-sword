@@ -1,4 +1,4 @@
-const { OK, INTERNAL_SERVER_ERROR, FORBIDDEN, BAD_REQUEST } = require('http-status');
+const { OK, INTERNAL_SERVER_ERROR, FORBIDDEN, NOT_FOUND, BAD_REQUEST } = require('http-status');
 
 const authController = ({ authService }) => {
   const login = async (ctx) => {
@@ -12,6 +12,9 @@ const authController = ({ authService }) => {
       switch (err.message) {
         case 'invalid credentials':
           ctx.status = FORBIDDEN;
+          break;
+        case 'user not found':
+          ctx.status = NOT_FOUND;
           break;
         case 'invalid email or password':
           ctx.status = BAD_REQUEST;

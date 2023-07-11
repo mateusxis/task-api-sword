@@ -1,4 +1,4 @@
-const taskService = ({ taskDomain }) => {
+const taskService = ({ messaging, taskDomain }) => {
   const list = async ({ user }) => {
     const task = await taskDomain.list({ userId: user.id, role: user.role });
 
@@ -13,12 +13,14 @@ const taskService = ({ taskDomain }) => {
 
   const save = async ({ user, task: { executedAt, summary, title } }) => {
     const task = await taskDomain.save({ executedAt, summary, title, userId: user.id, role: user.role });
+    messaging.send('CREATED_TASK', { user: ({ id, name } = user), task });
 
     return task;
   };
 
   const update = async ({ user, task: { id, executedAt, summary, title, userId } }) => {
     const task = await taskDomain.update({ id, executedAt, summary, title, userId: userId.id, role: user.role });
+    messaging.send('UPDATED_TASK', { user: ({ id, name } = user), task });
 
     return task;
   };
