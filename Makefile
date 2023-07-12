@@ -7,6 +7,8 @@ APPDIR = /usr/dev
 PWD=$(shell pwd)
 SERVER_PORT=8014
 SERVER_PORT_DEBUG=18014
+SOCKET_SERVER_PORT=3333
+SOCKET_SERVER_PORT_DEBUG=13333
 CONTAINER_NAME=task-api
 DOCKER_DATE_TAG=$(shell date +%Y-%m)
 
@@ -38,6 +40,17 @@ stop: ## Stop the Server
 restart: ## Restart the Server
 	@make stop
 	@make start
+
+start-socket: check-if-docker-image-exists ## Start the Socket Server for development purporses
+	@echo 'Running on http://localhost:$(SOCKET_SERVER_PORT)'
+	@docker run -t${INTERACTIVE} --rm -v ${PWD}:${APPDIR}:delegated --env-file=.env -e CMD="yarn start-socket:dev" -p $(SOCKET_SERVER_PORT):3333 -p $(SOCKET_SERVER_PORT_DEBUG):5859 -e USER_PERM=$(shell id -u):$(shell id -g) --name ${CONTAINER_NAME}-socket dev/${CONTAINER_NAME}:latest
+
+stop-socket: ## Stop the Socket Server
+	@docker stop ${CONTAINER_NAME}-socket
+
+restart-socket: ## Restart the Socket Server
+	@make stop-socket
+	@make start-socket
 
 start-database:
 	@echo 'Running database server'

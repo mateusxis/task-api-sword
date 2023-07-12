@@ -13,6 +13,8 @@ FROM node:18-slim as base
 FROM base as development
     ENV SERVER_PORT 80
     EXPOSE ${SERVER_PORT}
+    ENV SOCKET_SERVER_PORT 3333
+    EXPOSE ${SOCKET_SERVER_PORT}
     ENV NODE_ENV development
 
     ENTRYPOINT ["./Dockerfile_entrypoint.sh"]
