@@ -19,6 +19,8 @@ beforeEach(() => {
   process.env.NSQ_TOPIC_CREATED_TASK = 'MESSAGING_TOPIC_CREATED_TASK';
   process.env.NSQ_TOPIC_UPDATED_TASK = 'MESSAGING_TOPIC_UPDATED_TASK';
   process.env.NSQ_MESSAGING_CHANNEL = 'task-api';
+  process.env.SOCKET_SERVER_ADDRESS = 'localhost';
+  process.env.SOCKET_SERVER_PORT = 3333;
   process.env.SERVER_PORT = 3000;
 
   jest.resetAllMocks();
@@ -47,6 +49,10 @@ describe('config()', () => {
         messagingChannel: 'task-api',
         maxInFlight: 1,
         messageTimeout: 60000
+      },
+      socket: {
+        serverAddress: 'localhost',
+        port: 3333
       },
       nodeEnv: 'development',
       serverPort: 3000
@@ -123,7 +129,7 @@ describe('config()', () => {
     });
   });
 
-  describe('messaging', () => {
+  describe('nsq', () => {
     it('should throw error when server address variable is missing', () => {
       delete process.env.NSQ_SERVER_ADDRESS;
 
@@ -152,6 +158,20 @@ describe('config()', () => {
       delete process.env.NSQ_MESSAGING_CHANNEL;
 
       expect(() => config()).toThrowError('"NSQ_MESSAGING_CHANNEL" must be defined.');
+    });
+  });
+
+  describe('socket', () => {
+    it('should throw error when server address variable is missing', () => {
+      delete process.env.SOCKET_SERVER_ADDRESS;
+
+      expect(() => config()).toThrowError('"SOCKET_SERVER_ADDRESS" must be defined.');
+    });
+
+    it('should throw error when serve port variable is missing', () => {
+      delete process.env.SOCKET_SERVER_PORT;
+
+      expect(() => config()).toThrowError('"SOCKET_SERVER_PORT" must be defined.');
     });
   });
 });

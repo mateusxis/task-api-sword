@@ -58,6 +58,16 @@ module.exports = () => {
     };
   };
 
+  const getSocket = () => {
+    assert(process.env.SOCKET_SERVER_ADDRESS, '"SOCKET_SERVER_ADDRESS" must be defined.');
+    assert(process.env.SOCKET_SERVER_PORT, '"SOCKET_SERVER_PORT" must be defined.');
+
+    return {
+      serverAddress: process.env.SOCKET_SERVER_ADDRESS,
+      port: parseInt(process.env.SOCKET_SERVER_PORT, 10)
+    };
+  };
+
   const getServerPort = () => {
     assert(process.env.SERVER_PORT, '"SERVER_PORT" must be defined.');
 
@@ -71,6 +81,7 @@ module.exports = () => {
     nodeEnv: getNodeEnv(),
     serverPort: getServerPort(),
     logging: getLogging(),
-    nsq: getNSQ()
+    nsq: getNSQ(),
+    socket: getSocket()
   };
 };

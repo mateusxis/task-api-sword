@@ -1,6 +1,7 @@
 const { createContainer, asFunction, asValue } = require('awilix');
 
 const authService = require('./app/auth');
+const eventHandler = require('./app/eventHandler');
 const taskService = require('./app/task');
 const userService = require('./app/user');
 const authDomain = require('./domain/auth');
@@ -19,6 +20,7 @@ const userController = require('./interfaces/http/controllers/user');
 const middlewares = require('./interfaces/http/middlewares');
 const router = require('./interfaces/http/router');
 const server = require('./interfaces/http/server');
+const socketServer = require('./interfaces/socket/server');
 const config = require('../config');
 
 const container = createContainer();
@@ -38,6 +40,7 @@ container.register({
   middlewares: asFunction(middlewares).singleton(),
   router: asFunction(router).singleton(),
   server: asFunction(server).singleton(),
+  socketServer: asFunction(socketServer).singleton(),
   taskDomain: asFunction(taskDomain).singleton(),
   taskRepository: asFunction(taskRepository).singleton(),
   taskService: asFunction(taskService).singleton(),
