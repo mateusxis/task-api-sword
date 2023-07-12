@@ -22,7 +22,6 @@ const userController = ({ userService }) => {
       ctx.status = CREATED;
       ctx.body = user;
     } catch (err) {
-      console.log(err.message);
       switch (err.message) {
         case 'existed user':
           ctx.status = CONFLICT;

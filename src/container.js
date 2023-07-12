@@ -1,6 +1,5 @@
-const { createContainer, asClass, asFunction, asValue } = require('awilix');
+const { createContainer, asFunction, asValue } = require('awilix');
 
-const app = require('./app');
 const authService = require('./app/auth');
 const taskService = require('./app/task');
 const userService = require('./app/user');
@@ -25,7 +24,6 @@ const config = require('../config');
 const container = createContainer();
 
 container.register({
-  app: asFunction(app).singleton(),
   authentication: asFunction(authentication).singleton(),
   authDomain: asFunction(authDomain).singleton(),
   authController: asFunction(authController).singleton(),

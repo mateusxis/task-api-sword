@@ -1,7 +1,7 @@
 const container = require('./src/container');
-const app = container.resolve('app');
+const server = container.resolve('server');
 
-app.start().catch((err) => {
-  app.logger.error(err.stack);
+server.start().catch((err) => {
+  server.logger.error(err.stack);
   process.exit(1);
 });
