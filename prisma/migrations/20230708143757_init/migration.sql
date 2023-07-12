@@ -17,7 +17,7 @@ CREATE TABLE `Task` (
     `title` VARCHAR(150) NULL,
     `summary` VARCHAR(2500) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
     `executedAt` DATETIME(3) NULL,
     `userId` INTEGER NOT NULL,
 
