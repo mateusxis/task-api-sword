@@ -33,6 +33,10 @@
 
 - Run `make start-nsq` > Loads a container with a NSQ
 
+### WebSocket Server Setup (Development)
+
+- Run `make start-socket` > Loads a container with a WebSocket server
+
 ## CLI Tools
 
 - `yarn start` - start the task-api for production
@@ -44,6 +48,99 @@
 - `yarn format` - format codebase
 - `yarn prepare` - install husky configuration
 - `yarn migrate:database` - migrate your schema to database
+
+## Tip for testing endpoints
+
+- Create a new DEV > `curl -s -X POST "http://localhost:8014/users" -H "Content-Type: application/json" -d '{ "name": "Joe Dole", "email": "joe@dole.com", "password": "123456", "role": "DEV"}'`
+
+  ```json
+  {
+    "id": 1,
+    "email": "joe@dole.com",
+    "name": "Joe Dole",
+    "createdAt": "2023-07-12T19:58:30.717Z",
+    "role": "DEV"
+  }
+  ```
+
+- Create a new Manager > `curl -s -X POST "http://localhost:8014/users" -H 'Content-Type: application/json' -d '{ "name": "Mary Josh", "email": "mary@josh.com", "password": "654321", "role": "MANAGER"}'`
+
+  ```json
+  {
+    "id": 2,
+    "email": "mary@josh.com",
+    "name": "Mary Josh",
+    "createdAt": "2023-07-12T19:59:10.540Z",
+    "role": "MANAGER"
+  }
+  ```
+
+- Login User > `curl -s -X POST "http://localhost:8014/login" -H 'Content-Type: application/json' -d '{ "email": "mary@josh.com", "password": "654321"}'`
+  ```json
+  {
+    "user": {
+      "id": 2,
+      "email": "mary@josh.com",
+      "name": "Mary Josh",
+      "createdAt": "2023-07-12T19:59:10.540Z",
+      "role": "MANAGER"
+    },
+    "token": "<MANAGER:TOKEN>"
+  }
+  ```
+- Create a new task > `curl -s -X POST "http://localhost:8014/tasks" -H 'Content-Type: application/json' -d '{ "executedAt": "2023-01-01 22:05:01", "title": "Task 1", "summary": "Task 1 successfully carried out in 3 well-defined steps and aligned with those involved\nIt was necessary to buy new equipment to carry it out." }' -H 'authorization: Bearer <TECH:TOKEN>'`
+
+  ```json
+  {
+    "id": 1,
+    "title": "Task 1",
+    "summary": "Task 1 successfully carried out in 3 well-defined steps and aligned with those involved\nIt was necessary to buy new equipment to carry it out.",
+    "createdAt": "2023-07-12T20:50:16.676Z",
+    "updatedAt": "2023-07-12T20:50:16.676Z",
+    "executedAt": "2023-01-02T01:05:01.000Z",
+    "userId": 1
+  }
+  ```
+
+- Dev List his tasks > `curl -s -X GET "http://localhost:8014/tasks" -H 'authorization: Bearer <TECH:TOKEN>'`
+
+  ```json
+  [
+    {
+      "id": 1,
+      "title": "Task 1",
+      "summary": "Task 1 successfully carried out in 3 well-defined steps and aligned with those involved\nIt was necessary to buy new equipment to carry it out.",
+      "createdAt": "2023-07-12T20:50:16.676Z",
+      "updatedAt": "2023-07-12T20:50:16.676Z",
+      "executedAt": "2023-01-02T01:05:01.000Z",
+      "userId": 1
+    }
+  ]
+  ```
+
+- Manager List DEV task > `curl -s -X GET "http://localhost:8014/tasks" -H 'authorization: Bearer <MANAGER:TOKEN>'`
+  ```json
+  [
+    {
+      "id": 1,
+      "title": "Task 1",
+      "summary": "Task 1 successfully carried out in 3 well-defined steps and aligned with those involved\nIt was necessary to buy new equipment to carry it out.",
+      "createdAt": "2023-07-12T20:50:16.676Z",
+      "updatedAt": "2023-07-12T20:50:16.676Z",
+      "executedAt": "2023-01-02T01:05:01.000Z",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "title": "Task 1",
+      "summary": "Task 2 performed with flying colors\nNo impediments found.",
+      "createdAt": "2023-07-12T20:51:31.775Z",
+      "updatedAt": "2023-07-12T20:51:31.775Z",
+      "executedAt": "2022-12-02T13:05:01.000Z",
+      "userId": 3
+    }
+  ]
+  ```
 
 ## Tech
 
