@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Task Api</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Arial, sans-serif;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
+  <script>
+    function blobToString(blob) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+
+        reader.onerror = () => {
+          reject(new Error('Error converting Blob to string'));
+        };
+
+        reader.readAsText(blob);
+      });
+    }
+
+    function addItem(message) {
+      const table = document.getElementById("table");
+      const newRow = table.insertRow();
+      const newCell = newRow.insertCell();
+
+      newCell.innerHTML = message;
+    }
+
+    const socket = new WebSocket('ws://localhost:3333', ['My Token']);
+    // Handle WebSocket connection open event
+    socket.onopen = function (event) {
+      console.log('WebSocket connection opened');
+    };
+
+    // Handle WebSocket message received event
+    socket.onmessage = function (event) {
+      blobToString(event.data)
+        .then((message) => {
+          addItem(message)
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    // Handle WebSocket connection close event
+    socket.onclose = function (event) {
+      console.log('WebSocket connection closed');
+    };
+  </script>
+</head>
+
+<body>
+  <h1>WebSocket Task Api</h1>
+  <table id="table">
+    <tr>
+      <th>Notifications</th>
+    </tr>
+  </table>
+</body>
+
+</html>
