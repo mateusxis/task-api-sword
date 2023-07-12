@@ -14,6 +14,7 @@ const logger = require('./infra/logger');
 const { messageReader, messageWriter } = require('./infra/messaging');
 const taskRepository = require('./infra/repositories/task');
 const userRepository = require('./infra/repositories/user');
+const socketClient = require('./infra/socket');
 const authController = require('./interfaces/http/controllers/auth');
 const taskController = require('./interfaces/http/controllers/task');
 const userController = require('./interfaces/http/controllers/user');
@@ -40,6 +41,7 @@ container.register({
   middlewares: asFunction(middlewares).singleton(),
   router: asFunction(router).singleton(),
   server: asFunction(server).singleton(),
+  socketClient: asFunction(socketClient).singleton(),
   socketServer: asFunction(socketServer).singleton(),
   taskDomain: asFunction(taskDomain).singleton(),
   taskRepository: asFunction(taskRepository).singleton(),

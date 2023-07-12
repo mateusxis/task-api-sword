@@ -1,7 +1,7 @@
 const createdTaskEventHandler = require('./handlers/createdTask');
 const updatedTaskEventHandler = require('./handlers/updatedTask');
 
-module.exports = ({ messageReader, logger, config }) => {
+module.exports = ({ messageReader, logger, config, socketClient }) => {
   const initialize = async () => {
     const eventHandlersMapping = [
       {
@@ -9,14 +9,14 @@ module.exports = ({ messageReader, logger, config }) => {
           key: 'MESSAGING_TOPIC_CREATED_TASK',
           value: config.nsq.messagingTopicCreatedTask
         },
-        handler: createdTaskEventHandler()
+        handler: createdTaskEventHandler({ socketClient })
       },
       {
         topic: {
           key: 'MESSAGING_TOPIC_UPDATED_TASK',
           value: config.nsq.messagingTopicUpdatedTask
         },
-        handler: updatedTaskEventHandler()
+        handler: updatedTaskEventHandler({ socketClient })
       }
     ];
 
