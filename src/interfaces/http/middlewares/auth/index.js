@@ -1,4 +1,4 @@
-const { INTERNAL_SERVER_ERROR, FORBIDDEN, BAD_REQUEST } = require('http-status');
+const { INTERNAL_SERVER_ERROR, FORBIDDEN, UNAUTHORIZED } = require('http-status');
 
 const authMiddleware = ({ authentication }) => {
   return async (ctx, next) => {
@@ -15,7 +15,7 @@ const authMiddleware = ({ authentication }) => {
           ctx.status = FORBIDDEN;
           break;
         case 'invalid signature':
-          ctx.status = BAD_REQUEST;
+          ctx.status = UNAUTHORIZED;
           break;
         default:
           ctx.status = INTERNAL_SERVER_ERROR;
