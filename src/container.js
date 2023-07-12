@@ -31,6 +31,7 @@ container.register({
   config: asValue(config()),
   database: asFunction(database).singleton(),
   encryption: asFunction(encryption).singleton(),
+  eventHandler: asFunction(eventHandler).singleton(),
   logger: asFunction(logger).singleton(),
   messageReader: asFunction(messageReader).singleton(),
   messageWriter: asFunction(messageWriter).singleton(),
