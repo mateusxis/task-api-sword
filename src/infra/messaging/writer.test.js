@@ -44,7 +44,6 @@ describe('writer()', () => {
       on: (event, callback) => event === 'closed' && callback(),
       connect: jest.fn()
     };
-    const spyFinishWriter = jest.spyOn(writerFunctions, 'connect');
 
     Writer.mockImplementationOnce(() => writerFunctions);
 
