@@ -30,7 +30,7 @@ build-docker-image:
 
 start: welcome check-if-docker-image-exists ## Start the Server for development purporses
 	@echo 'Running on http://localhost:$(SERVER_PORT)'
-	@docker run -t${INTERACTIVE} --rm -v ${PWD}:${APPDIR}:delegated --env-file=.env -p $(SERVER_PORT):80 -p $(SERVER_PORT_DEBUG):5858 -e USER_PERM=$(shell id -u):$(shell id -g) --name ${CONTAINER_NAME} dev/${CONTAINER_NAME}:latest
+	@docker run -t${INTERACTIVE} --rm -v ${PWD}:${APPDIR}:delegated --env-file=.env -e CMD="yarn start:dev" -p $(SERVER_PORT):80 -p $(SERVER_PORT_DEBUG):5858 -e USER_PERM=$(shell id -u):$(shell id -g) --name ${CONTAINER_NAME} dev/${CONTAINER_NAME}:latest
 
 stop: ## Stop the Server
 	@docker stop ${CONTAINER_NAME}

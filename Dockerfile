@@ -38,4 +38,4 @@ FROM base as production
 
     USER dev
 
-    CMD yarn start
+    CMD ${CMD}

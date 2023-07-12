@@ -1,5 +1,5 @@
 FROM nsqio/nsq
-    RUN echo "nsqd  -msg-timeout=96h -max-msg-timeout=336h -mem-queue-size=0 -data-path=/data -lookupd-tcp-address=localhost:4160 -broadcast-address=host.docker.internal &" > /entrypoint.sh; \
+    RUN echo "nsqd  -msg-timeout=96h -max-msg-timeout=336h -mem-queue-size=0 -data-path=/data -lookupd-tcp-address=localhost:4160 -broadcast-address=127.0.0.1 &" > /entrypoint.sh; \
     echo "nsqlookupd &" >> /entrypoint.sh; \
     echo "nsqadmin  --nsqd-http-address=localhost:4151" >> /entrypoint.sh; \
     chmod 777 /entrypoint.sh
