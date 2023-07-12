@@ -13,14 +13,16 @@ const taskService = ({ messageWriter, taskDomain, config }) => {
 
   const save = async ({ user, task: { executedAt, summary, title } }) => {
     const task = await taskDomain.save({ executedAt, summary, title, userId: user.id, role: user.role });
-    messageWriter.send(config.nsq.messagingTopicCreatedTask, { user: ({ id, name } = user), task });
+    if (task.executedAt)
+      messageWriter.send(config.nsq.messagingTopicCreatedTask, { user: ({ id, name } = user), task });
 
     return task;
   };
 
   const update = async ({ user, task: { id, executedAt, summary, title } }) => {
     const task = await taskDomain.update({ id, executedAt, summary, title, userId: user.id, role: user.role });
-    messageWriter.send(config.nsq.messagingTopicUpdatedTask, { user: ({ id, name } = user), task });
+    if (task.executedAt)
+      messageWriter.send(config.nsq.messagingTopicUpdatedTask, { user: ({ id, name } = user), task });
 
     return task;
   };
