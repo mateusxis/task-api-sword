@@ -15,6 +15,10 @@ beforeEach(() => {
   process.env.LOGGING_MAX_SIZE = '102400';
   process.env.NSQ_SERVER_ADDRESS = 'http://localhost';
   process.env.NSQ_SERVER_PORT = 4150;
+  process.env.NSQ_READER_ADDRESS = 'localhost:4161';
+  process.env.NSQ_TOPIC_CREATED_TASK = 'MESSAGING_TOPIC_CREATED_TASK';
+  process.env.NSQ_TOPIC_UPDATED_TASK = 'MESSAGING_TOPIC_UPDATED_TASK';
+  process.env.NSQ_MESSAGING_CHANNEL = 'task-api';
   process.env.SERVER_PORT = 3000;
 
   jest.resetAllMocks();
@@ -36,7 +40,13 @@ describe('config()', () => {
       },
       nsq: {
         serverAddress: 'http://localhost',
-        serverPort: 4150
+        serverPort: 4150,
+        readerAddress: 'localhost:4161',
+        messagingTopicCreatedTask: 'MESSAGING_TOPIC_CREATED_TASK',
+        messagingTopicUpdatedTask: 'MESSAGING_TOPIC_UPDATED_TASK',
+        messagingChannel: 'task-api',
+        maxInFlight: 1,
+        messageTimeout: 60000
       },
       nodeEnv: 'development',
       serverPort: 3000
@@ -124,6 +134,24 @@ describe('config()', () => {
       delete process.env.NSQ_SERVER_PORT;
 
       expect(() => config()).toThrowError('"NSQ_SERVER_PORT" must be defined.');
+    });
+
+    it('should throw error when topic created task variable is missing', () => {
+      delete process.env.NSQ_TOPIC_CREATED_TASK;
+
+      expect(() => config()).toThrowError('"NSQ_TOPIC_CREATED_TASK" must be defined.');
+    });
+
+    it('should throw error when topic updated task variable is missing', () => {
+      delete process.env.NSQ_TOPIC_UPDATED_TASK;
+
+      expect(() => config()).toThrowError('"NSQ_TOPIC_UPDATED_TASK" must be defined.');
+    });
+
+    it('should throw error when messaging channel variable is missing', () => {
+      delete process.env.NSQ_MESSAGING_CHANNEL;
+
+      expect(() => config()).toThrowError('"NSQ_MESSAGING_CHANNEL" must be defined.');
     });
   });
 });

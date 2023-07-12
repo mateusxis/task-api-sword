@@ -29,7 +29,7 @@ const taskRepository = ({ database }) => {
       where: {
         id: task.id
       },
-      data: { ...task, updateAt: new Date() }
+      data: task
     });
 
   return {

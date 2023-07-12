@@ -10,7 +10,7 @@ const authentication = require('./infra/authentication');
 const database = require('./infra/database');
 const encryption = require('./infra/encryption');
 const logger = require('./infra/logger');
-const messaging = require('./infra/messaging');
+const { messageReader, messageWriter } = require('./infra/messaging');
 const taskRepository = require('./infra/repositories/task');
 const userRepository = require('./infra/repositories/user');
 const authController = require('./interfaces/http/controllers/auth');
@@ -32,7 +32,8 @@ container.register({
   database: asFunction(database).singleton(),
   encryption: asFunction(encryption).singleton(),
   logger: asFunction(logger).singleton(),
-  messaging: asFunction(messaging).singleton(),
+  messageReader: asFunction(messageReader).singleton(),
+  messageWriter: asFunction(messageWriter).singleton(),
   middlewares: asFunction(middlewares).singleton(),
   router: asFunction(router).singleton(),
   server: asFunction(server).singleton(),

@@ -41,10 +41,20 @@ module.exports = () => {
   const getNSQ = () => {
     assert(process.env.NSQ_SERVER_ADDRESS, '"NSQ_SERVER_ADDRESS" must be defined.');
     assert(process.env.NSQ_SERVER_PORT, '"NSQ_SERVER_PORT" must be defined.');
+    assert(process.env.NSQ_READER_ADDRESS, '"NSQ_READER_ADDRESS" must be defined.');
+    assert(process.env.NSQ_TOPIC_CREATED_TASK, '"NSQ_TOPIC_CREATED_TASK" must be defined.');
+    assert(process.env.NSQ_TOPIC_UPDATED_TASK, '"NSQ_TOPIC_UPDATED_TASK" must be defined.');
+    assert(process.env.NSQ_MESSAGING_CHANNEL, '"NSQ_MESSAGING_CHANNEL" must be defined.');
 
     return {
       serverAddress: process.env.NSQ_SERVER_ADDRESS,
-      serverPort: parseInt(process.env.NSQ_SERVER_PORT, 10)
+      serverPort: parseInt(process.env.NSQ_SERVER_PORT, 10),
+      readerAddress: process.env.NSQ_READER_ADDRESS,
+      messagingTopicCreatedTask: process.env.NSQ_TOPIC_CREATED_TASK,
+      messagingTopicUpdatedTask: process.env.NSQ_TOPIC_UPDATED_TASK,
+      messagingChannel: process.env.NSQ_MESSAGING_CHANNEL,
+      maxInFlight: parseInt(process.env.NSQ_PARALLEL_SIZE || 1, 10),
+      messageTimeout: parseInt(process.env.NSQ_TTL_MS || 60000, 10)
     };
   };
 

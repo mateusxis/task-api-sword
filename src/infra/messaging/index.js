@@ -1,3 +1,4 @@
+const messageReader = require('./reader');
 const messageWriter = require('./writer');
 
-module.exports = messageWriter;
+module.exports = { messageReader, messageWriter };

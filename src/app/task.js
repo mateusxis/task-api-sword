@@ -1,4 +1,4 @@
-const taskService = ({ messaging, taskDomain }) => {
+const taskService = ({ messageWriter, taskDomain, config }) => {
   const list = async ({ user }) => {
     const task = await taskDomain.list({ userId: user.id, role: user.role });
 
@@ -13,14 +13,14 @@ const taskService = ({ messaging, taskDomain }) => {
 
   const save = async ({ user, task: { executedAt, summary, title } }) => {
     const task = await taskDomain.save({ executedAt, summary, title, userId: user.id, role: user.role });
-    messaging.send('CREATED_TASK', { user: ({ id, name } = user), task });
+    messageWriter.send(config.nsq.messagingTopicCreatedTask, { user: ({ id, name } = user), task });
 
     return task;
   };
 
-  const update = async ({ user, task: { id, executedAt, summary, title, userId } }) => {
-    const task = await taskDomain.update({ id, executedAt, summary, title, userId: userId.id, role: user.role });
-    messaging.send('UPDATED_TASK', { user: ({ id, name } = user), task });
+  const update = async ({ user, task: { id, executedAt, summary, title } }) => {
+    const task = await taskDomain.update({ id, executedAt, summary, title, userId: user.id, role: user.role });
+    messageWriter.send(config.nsq.messagingTopicUpdatedTask, { user: ({ id, name } = user), task });
 
     return task;
   };
