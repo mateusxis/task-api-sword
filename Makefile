@@ -32,7 +32,7 @@ build-docker-image:
 
 start: welcome check-if-docker-image-exists ## Start the Server for development purporses
 	@echo 'Running on http://localhost:$(SERVER_PORT)'
-	@docker run -t${INTERACTIVE} --rm -v ${PWD}:${APPDIR}:delegated --env-file=.env -e CMD="yarn start:dev" -p $(SERVER_PORT):80 -p $(SERVER_PORT_DEBUG):5858 -e USER_PERM=$(shell id -u):$(shell id -g) --name ${CONTAINER_NAME} dev/${CONTAINER_NAME}:latest
+	@docker run -t${INTERACTIVE} --rm -v ${PWD}:${APPDIR}:delegated --add-host=host.docker.internal:host-gateway --env-file=.env -e CMD="yarn start:dev" -p $(SERVER_PORT):8014 -p $(SERVER_PORT_DEBUG):5858 -e USER_PERM=$(shell id -u):$(shell id -g) --name ${CONTAINER_NAME} dev/${CONTAINER_NAME}:latest
 
 stop: ## Stop the Server
 	@docker stop ${CONTAINER_NAME}
@@ -43,7 +43,7 @@ restart: ## Restart the Server
 
 start-socket: check-if-docker-image-exists ## Start the Socket Server for development purporses
 	@echo 'Running on http://localhost:$(SOCKET_SERVER_PORT)'
-	@docker run -t${INTERACTIVE} --rm -v ${PWD}:${APPDIR}:delegated --env-file=.env -e CMD="yarn start-socket:dev" -p $(SOCKET_SERVER_PORT):3333 -p $(SOCKET_SERVER_PORT_DEBUG):5859 -e USER_PERM=$(shell id -u):$(shell id -g) --name ${CONTAINER_NAME}-socket dev/${CONTAINER_NAME}:latest
+	@docker run -t${INTERACTIVE} --rm -v ${PWD}:${APPDIR}:delegated --add-host=host.docker.internal:host-gateway --env-file=.env -e CMD="yarn start-socket:dev" -p $(SOCKET_SERVER_PORT):3333 -p $(SOCKET_SERVER_PORT_DEBUG):5859 -e USER_PERM=$(shell id -u):$(shell id -g) --name ${CONTAINER_NAME}-socket dev/${CONTAINER_NAME}:latest
 
 stop-socket: ## Stop the Socket Server
 	@docker stop ${CONTAINER_NAME}-socket
@@ -63,9 +63,9 @@ build-docker-image-nsq:
 	@echo 'Building nsq docker image from Dockerfile'
 	@docker build -t dev/nsq:latest - < ./Dockerfile_nsq
 
-start-nsq:
+start-nsq: build-docker-image-nsq
 	@echo 'Running NSQ server'
-	@docker run --rm -d -v ${PWD}/nsq_data:/data -p 4150:4150 -p 4151:4151 -p 4160:4160  -p 4161:4161 -p 4170:4170 -p 4171:4171 --name nsq  dev/nsq:latest
+	@docker run --rm -d -v ${PWD}/nsq_data:/data --add-host=host.docker.internal:host-gateway -p 4150:4150 -p 4151:4151 -p 4160:4160  -p 4161:4161 -p 4170:4170 -p 4171:4171 --name nsq  dev/nsq:latest
 
 stop-nsq:
 	@docker stop nsq

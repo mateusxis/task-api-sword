@@ -11,7 +11,7 @@ FROM node:18-slim as base
         apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 FROM base as development
-    ENV SERVER_PORT 80
+    ENV SERVER_PORT 8014
     EXPOSE ${SERVER_PORT}
     ENV SOCKET_SERVER_PORT 3333
     EXPOSE ${SOCKET_SERVER_PORT}
@@ -20,7 +20,7 @@ FROM base as development
     ENTRYPOINT ["./Dockerfile_entrypoint.sh"]
 
 FROM base as production
-    ENV SERVER_PORT 8080
+    ENV SERVER_PORT 8014
     EXPOSE ${SERVER_PORT}
     ENV NODE_ENV production
 

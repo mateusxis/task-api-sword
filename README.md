@@ -17,7 +17,7 @@
 1. Clone the repository with `git clone https://github.com/mateusxis/task-api.git`
 2. Install the dependencies with [Yarn](https://yarnpkg.com/en/docs/install/)
 3. Create the development [Databases](https://github.com/mateusxis/task-api#database-setup-development)
-4. Run database migrations and seed with `yarn database:migrate`
+4. Run database migrations and seed with `yarn migrate:database` or after start server, run `docker exec -it task-api yarn migrate:database`
 5. Create the development [NSQ](https://github.com/mateusxis/task-api#nsq-setup-development)
 6. Copy the configuration .env.default file to .env file
 7. Copy the configuration .env.mysql.default file to .env.mysql file
